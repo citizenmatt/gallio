@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+    <?include ..\..\Installer\Common.wxi ?>
+   
+<?ifdef FEATURE_RESHARPER_RUNNER?>
+    <Fragment>
+        <Feature Id="feat_Gallio.ReSharper" Title="ReSharper Plug-ins" Level="1" AllowAdvertise="no"
+            Description="Installs the ReSharper plug-ins.">
+<?ifdef FEATURE_RESHARPER_RUNNER_31 ?>
+            <FeatureRef Id='feat_Gallio.ReSharper.V31'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_40 ?>
+            <FeatureRef Id='feat_Gallio.ReSharper.V40'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_41 ?>
+            <FeatureRef Id='feat_Gallio.ReSharper.V41'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_45 ?>
+            <FeatureRef Id='feat_Gallio.ReSharper.V45'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_50 ?>
+            <FeatureRef Id='feat_Gallio.ReSharper.V50'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_50 ?>
+			<FeatureRef Id='feat_Gallio.ReSharper.V51'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_60 ?>
+			<FeatureRef Id='feat_Gallio.ReSharper.V60'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_61 ?>
+			<FeatureRef Id='feat_Gallio.ReSharper.V61'/>
+<?endif?>
+<?ifdef FEATURE_RESHARPER_RUNNER_70 ?>
+			<FeatureRef Id='feat_Gallio.ReSharper.V70'/>
+<?endif?>
+        </Feature>
+    </Fragment>
+<?endif?>
+</Wix>

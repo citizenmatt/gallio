@@ -1,0 +1,87 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.Ambience\Gallio.Ambience$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Ambience.Server\Gallio.Ambience.Server$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Ambience.UI\Gallio.Ambience.UI$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Ambience.Tests\Gallio.Ambience.Tests$(ProjectVariant).csproj" />
+
+    <AssemblyFile Include="$(ModuleTempDir)\Gallio.Ambience.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="$(ModuleTempDir)\Gallio.Ambience.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <XmlDocFile Include="Gallio.Ambience\bin\Gallio.Ambience.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="Gallio.Ambience\Gallio.Ambience.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+
+    <PluginFile Include="Gallio.Ambience.UI\Gallio.Ambience.UI.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <AssemblyFile Include="Gallio.Ambience.UI\bin\Gallio.Ambience.UI.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Ambience.UI\bin\Gallio.Ambience.UI.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+
+    <AssemblyFile Include="Gallio.Ambience.Server\bin\Gallio.Ambience.Server.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Ambience.Server\bin\Gallio.Ambience.Server.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Ambience.Server\bin\Gallio.Ambience.Server.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+
+    <LicenseFile Include="libs\db4o.license.html">
+      <ImagePath>licenses</ImagePath>
+    </LicenseFile>
+    <LicenseFile Include="libs\Cecil.FlowAnalysis.license.html">
+      <ImagePath>licenses</ImagePath>
+    </LicenseFile>
+    <LicenseFile Include="libs\Mono.GetOptions.license.html">
+      <ImagePath>licenses</ImagePath>
+    </LicenseFile>
+
+    <TestAssembly Include="Gallio.Ambience.Tests\bin\Gallio.Ambience.Tests.dll" />
+    
+    <Feature Include="FEATURE_AMBIENCE" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AmbienceMergeDependency Include="libs\net-3.5\Db4objects.Db4o.dll" />
+    <AmbienceMergeDependency Include="libs\net-3.5\Db4objects.Db4o.Linq.dll" />
+    <AmbienceMergeDependency Include="libs\net-3.5\Cecil.FlowAnalysis.dll" />
+    <AmbienceMergeDependency Include="libs\net-3.5\Mono.Cecil.dll" />
+  </ItemGroup>
+
+  <Target Name="BeforeImage"
+          Inputs="Gallio.Ambience\bin\Gallio.Ambience.dll;@(AmbienceMergeDependency)"
+          Outputs="$(ModuleTempDir)\Gallio.Ambience.dll;Gallio.Ambience.Tests\bin\Gallio.Ambience.dll;Gallio.Ambience.Server\bin\Gallio.Ambience.dll">
+    <Message Text="Running ILMerge on Gallio.Ambience.dll..."
+             Importance="High" />
+
+    <MakeDir Directories="$(ModuleImageDir)\bin" />
+    <Exec Command="&quot;$(ToolsDir)\ILMerge\ILMerge.exe&quot; &quot;Gallio.Ambience\bin\Gallio.Ambience.dll&quot; @(AmbienceMergeDependency->'&quot;%(Identity)&quot;', ' ') /closed /internalize &quot;/out:$(ModuleTempDir)\Gallio.Ambience.dll&quot; &quot;/keyfile:$(SourceDir)\Key.snk&quot;" />
+
+    <!-- Replace the copy of Ambience used for the tests because otherwise
+         we get assembly conflicts when Db4o tries to communicate remotely
+         with itself because the assembly name is different when ILMerge'd. -->
+    <Copy SourceFiles="$(ModuleTempDir)\Gallio.Ambience.dll"
+          DestinationFolder="Gallio.Ambience.Tests\bin" />
+    <Copy SourceFiles="$(ModuleTempDir)\Gallio.Ambience.dll"
+          DestinationFolder="Gallio.Ambience.Server\bin" />
+  </Target>
+
+  <Target Name="AfterPrecondition">
+    <Error Text="Cannot build Ambience when SkipILMerge is true."
+           Condition="'$(SkipILMerge)'=='true'" />
+  </Target>
+</Project>

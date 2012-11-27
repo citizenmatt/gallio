@@ -1,0 +1,45 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <!-- MVC C# Test Project -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.MvcWebApplicationTestProjectTemplate.CSharp">
+      <ImagePath>templates\VS2010\ProjectTemplates\CSharp\MbUnit3.MvcWebApplicationTestProjectTemplate.CSharp.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+
+  <!-- MVC VB Test Project -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.MvcWebApplicationTestProjectTemplate.VisualBasic">
+      <ImagePath>templates\VS2010\ProjectTemplates\VisualBasic\MbUnit3.MvcWebApplicationTestProjectTemplate.VisualBasic.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+
+  <!-- C# Test Project -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.TestProjectTemplate.CSharp">
+      <ImagePath>templates\VS2010\ProjectTemplates\CSharp\MbUnit3.TestProjectTemplate.CSharp.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+
+  <!-- VB Test Project -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.TestProjectTemplate.VisualBasic">
+      <ImagePath>templates\VS2010\ProjectTemplates\VisualBasic\MbUnit3.TestProjectTemplate.VisualBasic.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+
+  <!-- C# Test Fixture -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.ItemTemplates.CSharp">
+      <ImagePath>templates\VS2010\ItemTemplates\CSharp\MbUnit3.TestFixtureTemplate.CSharp.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+
+  <!-- VB Test Fixture -->
+  <ItemGroup>
+    <ExportArchive Include="MbUnit.ItemTemplates.VisualBasic">
+      <ImagePath>templates\VS2010\ItemTemplates\VisualBasic\MbUnit3.TestFixtureTemplate.VisualBasic.zip</ImagePath>
+    </ExportArchive>
+  </ItemGroup>
+</Project>

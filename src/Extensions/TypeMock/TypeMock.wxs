@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include ..\..\Installer\Common.wxi ?>
+
+    <Fragment>
+        <DirectoryRef Id="binFolder" FileSource="$(var.GallioTargetDir)\bin\">
+            <Directory Id="TypeMockIntegration" Name="TypeMock">
+                <Component Id="Gallio.TypeMockIntegration.dll" Guid="70433af5-abed-405a-9073-0aaecb9459c6" Win64="$(var.Win64Binary)">
+                    <File Name="Gallio.TypeMockIntegration.dll" KeyPath="yes" />
+                    <File Name="Gallio.TypeMockIntegration.plugin" />
+                </Component>
+                
+				<Component Id="TypeMock.Integration.dll" Guid="52dbfb41-73be-419d-8db0-54ab1c89bbb8" Win64="$(var.Win64Binary)">
+                    <File Name="TypeMock.Integration.dll" KeyPath="yes" />
+                </Component>
+				
+                <Directory Id="TypeMockIntegration.Resources" Name="Resources">
+                    <Component Id="Gallio.TypeMockIntegration.Resources" Guid="{1C9D9117-FCBD-4a28-AA5B-E7AF5CC014BD}" Win64="$(var.Win64Binary)">
+                        <File Name="Typemock.ico" KeyPath="yes" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+
+        <Feature Id='feat_TypeMockIntegration' Title='TypeMock.Net Integration' Level='1' AllowAdvertise="no"
+            Description='Provides integration with the TypeMock.Net mock object framework.'>
+            <ComponentRef Id="Gallio.TypeMockIntegration.dll"/>
+            <ComponentRef Id="TypeMock.Integration.dll"/>
+			<ComponentRef Id="Gallio.TypeMockIntegration.Resources"/>
+        </Feature>
+    </Fragment>
+</Wix>

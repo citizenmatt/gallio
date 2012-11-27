@@ -1,0 +1,74 @@
+// Copyright 2005-2010 Gallio Project - http://www.gallio.org/
+// Portions Copyright 2000-2004 Jonathan de Halleux
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+using System;
+
+namespace Gallio.Model.Filters
+{
+    /// <summary>
+    /// Visits the structure of filters.
+    /// </summary>
+    public interface IFilterVisitor
+    {
+        /// <summary>
+        /// Visits a <see cref="AnyFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitAnyFilter<T>(AnyFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="NoneFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitNoneFilter<T>(NoneFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="AndFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitAndFilter<T>(AndFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="OrFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitOrFilter<T>(OrFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="NotFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitNotFilter<T>(NotFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="PropertyFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitPropertyFilter<T>(PropertyFilter<T> filter);
+
+        /// <summary>
+        /// Visits a <see cref="EqualityFilter{T}" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitEqualityFilter<T>(EqualityFilter<T> filter)
+            where T : class, IEquatable<T>;
+
+        /// <summary>
+        /// Visits a <see cref="RegexFilter" />.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        void VisitRegexFilter(RegexFilter filter);
+    }
+}

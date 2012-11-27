@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.DLRIntegration"
+        recommendedInstallationPath="DLR"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>Dynamic Language Runtime Integration Plugin</name>
+    <version>0.0.0.0</version>
+    <description>Integrates the Dynamic Language Runtime with Gallio.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+  </dependencies>
+
+  <probingPaths>
+    <probingPath>libs</probingPath>
+    <probingPath>..\libs</probingPath>
+  </probingPaths>
+
+  <files>
+    <file path="Gallio.DLRIntegration.plugin" />
+    <file path="Gallio.DLRIntegration.dll" />
+    <file path="Gallio.DLRIntegration.dll.config" />
+    <!-- The following tokens are replaced during the build. -->
+    ${LibsFilesToken}
+    ${ScriptsFilesToken}
+  </files>
+
+  <assemblies>
+    <assembly fullName="Gallio.DLRIntegration, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.DLRIntegration.dll"
+              qualifyPartialName="true" />
+
+    <assembly fullName="Microsoft.Dynamic, Version=0.9.6.10, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+              codeBase="Microsoft.Dynamic.dll" />
+
+    <assembly fullName="Microsoft.Scripting, Version=0.9.6.10, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+              codeBase="Microsoft.Scripting.dll" />
+
+    <assembly fullName="Microsoft.Scripting.Core, Version=0.9.6.10, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+              codeBase="Microsoft.Scripting.Core.dll" />
+
+    <assembly fullName="Microsoft.Scripting.ExtensionAttribute, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+              codeBase="Microsoft.Scripting.ExtensionAttribute.dll" />
+  </assemblies>
+
+  <components>
+    <!-- DLR File types -->
+    
+    <component componentId="DLRIntegration.FileTypeRecognizers.RubySource"
+               serviceId="Gallio.FileTypeRecognizer">
+      <traits>
+        <id>RubySource</id>
+        <description>A Ruby source file.</description>
+        <fileNameRegex>.*\.rb</fileNameRegex>
+      </traits>
+    </component>
+
+    <component componentId="DLRIntegration.FileTypeRecognizers.PythonSource"
+               serviceId="Gallio.FileTypeRecognizer">
+      <traits>
+        <id>PythonSource</id>
+        <description>A Python source file.</description>
+        <fileNameRegex>.*\.py</fileNameRegex>
+      </traits>
+    </component>
+  </components>
+</plugin>

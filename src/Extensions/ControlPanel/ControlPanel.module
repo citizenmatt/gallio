@@ -1,0 +1,25 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.ControlPanel\Gallio.ControlPanel$(ProjectVariant).csproj" />
+
+    <AssemblyFile Include="Gallio.ControlPanel\bin\Gallio.ControlPanel.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.ControlPanel\bin\Gallio.ControlPanel.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.ControlPanel\Gallio.ControlPanel.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <PluginFile Include="Gallio.ControlPanel\Gallio.ControlPanel.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.ControlPanel\Resources\Gallio.ControlPanel.ico">
+      <ImagePath>bin\Resources</ImagePath>
+    </File>
+    
+    <Feature Include="FEATURE_CONTROLPANEL" />
+  </ItemGroup>
+</Project>

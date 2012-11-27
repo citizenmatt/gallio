@@ -1,0 +1,23 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.NAntTasks\Gallio.NAntTasks$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.NAntTasks.Tests\Gallio.NAntTasks.Tests$(ProjectVariant).csproj" />
+    
+    <PluginFile Include="Gallio.NAntTasks\Gallio.NAntTasks.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <PdbFile Include="Gallio.NAntTasks\bin\Gallio.NAntTasks.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <AssemblyFile Include="Gallio.NAntTasks\bin\Gallio.NAntTasks.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <XmlDocFile Include="Gallio.NAntTasks\bin\Gallio.NAntTasks.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    
+    <TestAssembly Include="Gallio.NAntTasks.Tests\bin\Gallio.NAntTasks.Tests.dll" />
+  </ItemGroup>
+</Project>

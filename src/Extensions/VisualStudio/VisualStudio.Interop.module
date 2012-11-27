@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  <Import Project="VisualStudio.targets" />
+  
+  <ItemGroup Condition="$(VSIPInstalled)">
+    <CSharpProject Include="Gallio.VisualStudio.Interop\Gallio.VisualStudio.Interop$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.VisualStudio.Interop.Tests\Gallio.VisualStudio.Interop.Tests$(ProjectVariant).csproj" />
+    
+    <PluginFile Include="Gallio.VisualStudio.Interop\Gallio.VisualStudio.Interop.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <AssemblyFile Include="Gallio.VisualStudio.Interop\bin\Gallio.VisualStudio.Interop.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>    
+    <PdbFile Include="Gallio.VisualStudio.Interop\bin\Gallio.VisualStudio.Interop.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+
+    <TestAssembly Include="Gallio.VisualStudio.Interop.Tests\bin\Gallio.VisualStudio.Interop.Tests.dll" />
+  </ItemGroup>
+
+  <Target Name="BeforeBuild">
+    <Error Condition="! $(VSIPInstalled)"
+           Text="VSIP packages must be installed to ensure that Gallio.VisualStudio.Interop component can be built.  This component is currently required for several features including navigate to source and debugging support.  Later it will be injected via the IoC." />
+  </Target>
+</Project>

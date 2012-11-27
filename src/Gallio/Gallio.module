@@ -1,0 +1,250 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <CSharpProject Include="Gallio\Gallio$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio35\Gallio35$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Host\Gallio.Host$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Tests\Gallio.Tests$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Reports\Gallio.Reports$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.UI\Gallio.UI$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.UI.Tests\Gallio.UI.Tests$(ProjectVariant).csproj" />
+    
+    <File Include="Gallio Website.url" />
+  
+    <AssemblyFile Include="$(ModuleTempDir)\Gallio.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="$(ModuleTempDir)\Gallio.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <AssemblyFile Include="$(ModuleTempDir)\Gallio.XmlSerializers.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <XmlDocFile Include="Gallio\bin\Gallio.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="Gallio\Gallio.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="Gallio\Resources\*.ico">
+      <ImagePath>bin\Resources</ImagePath>
+    </File>
+
+    <AssemblyFile Include="Gallio.Host\bin\Gallio.Host.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Host\bin\Gallio.Host.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Host\bin\Gallio.Host.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <AssemblyFile Include="Gallio.Host\bin\Gallio.Host.x86.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Host\bin\Gallio.Host.x86.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Host\bin\Gallio.Host.x86.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <AssemblyFile Include="Gallio.Host\bin\Gallio.Host.Elevated.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Host\bin\Gallio.Host.Elevated.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Host\bin\Gallio.Host.Elevated.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <AssemblyFile Include="Gallio.Host\bin\Gallio.Host.Elevated.x86.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Host\bin\Gallio.Host.Elevated.x86.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Host\bin\Gallio.Host.Elevated.x86.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    
+    <AssemblyFile Include="Gallio35\bin\Gallio35.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio35\bin\Gallio35.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <XmlDocFile Include="Gallio35\bin\Gallio35.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="Gallio35\Gallio35.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    
+    <AssemblyFile Include="Gallio.UI\bin\Gallio.UI.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.UI\bin\Gallio.UI.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <XmlDocFile Include="Gallio.UI\bin\Gallio.UI.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="Gallio.UI\Gallio.UI.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <AssemblyFile Include="libs\Aga.Controls.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+
+    <AssemblyFile Include="$(ModuleTempDir)\Gallio.Reports.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="$(ModuleTempDir)\Gallio.Reports.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <XmlDocFile Include="Gallio.Reports\bin\Gallio.Reports.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="Gallio.Reports\Gallio.Reports.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.Reports\Resources\css\*"
+          Exclude="Gallio.Reports\Resources\css\Gallio-Report.Generated.css">
+      <ImagePath>bin\Resources\css</ImagePath>
+    </File>
+    <File Include="Gallio.Reports\Resources\js\*">
+      <ImagePath>bin\Resources\js</ImagePath>
+    </File>
+    <File Include="Gallio.Reports\Resources\img\*">
+      <ImagePath>bin\Resources\img</ImagePath>
+    </File>
+    <File Include="Gallio.Reports\Resources\xsl\*">
+      <ImagePath>bin\Resources\xsl</ImagePath>
+    </File>
+    <File Include="Gallio.Reports\Resources\vm\*">
+      <ImagePath>bin\Resources\vm</ImagePath>
+    </File>
+
+    <LicenseFile Include="libs\Mono.Cecil.license.html">
+      <ImagePath>licenses</ImagePath>
+    </LicenseFile>
+    <LicenseFile Include="libs\CciMetadata\CciMetadata.License.txt">
+      <ImagePath>licenses</ImagePath>
+    </LicenseFile>
+    
+    <TestAssembly Include="Gallio.Tests\bin\Gallio.Tests.dll" />
+    <TestAssembly Include="Gallio.UI.Tests\bin\Gallio.UI.Tests.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DotNetFrameworkVersion)'=='4.0'">
+    <CSharpProject Include="Gallio40\Gallio40$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio40.Tests\Gallio40.Tests$(ProjectVariant).csproj" />
+    
+    <!-- Reenable when we have some content.
+    <XmlDocFile Include="Gallio40\bin\Gallio40.dll">
+    -->
+    <File Include="Gallio40\bin\Gallio40.xml">
+      <ImagePath>bin</ImagePath>
+    </File>
+    
+    <AssemblyFile Include="Gallio40\bin\Gallio40.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio40\bin\Gallio40.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <PluginFile Include="Gallio40\Gallio40.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+	<AssemblyFile Include="libs\Gallio.GenericParsing.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+	
+    <Feature Include="FEATURE_GALLIO40" />
+    
+    <TestAssembly Include="Gallio40.Tests\bin\Gallio40.Tests.dll" />
+  </ItemGroup>
+  
+  <Target 
+    Name="BeforeImage" 
+    DependsOnTargets="GallioReportsImage_ILMerge;GallioImage_ILMerge;GallioImage_NoILMerge" />
+
+  <ItemGroup>
+    <GallioReportsMergeDependency Include="Gallio.Reports\bin\NVelocity.dll" />
+  </ItemGroup>
+  
+  <Target
+    Name="GallioReportsImage_ILMerge"
+    Condition="'$(NoILMerge)'!='true'"
+    Inputs="Gallio.Reports\bin\Gallio.Reports.dll;@(GallioReportsMergeDependency)"
+    Outputs="$(ModuleTempDir)\Gallio.Reports.dll" >
+    
+    <Message 
+      Text="Running ILMerge on Gallio.Reports.dll..." 
+      Importance="High" />
+    
+    <Exec 
+      Command="&quot;$(ToolsDir)\ILMerge\ILMerge.exe&quot; &quot;Gallio.Reports\bin\Gallio.Reports.dll&quot; @(GallioReportsMergeDependency->'&quot;%(Identity)&quot;', ' ') /internalize &quot;/out:$(ModuleTempDir)\Gallio.Reports.dll&quot; &quot;/keyfile:$(SourceDir)\Key.snk&quot;" />
+      
+  </Target>
+
+  <ItemGroup>
+    <GallioMergeDependency Include="Gallio\bin\Mono.Cecil.dll" />
+    <GallioMergeDependency Include="Gallio\bin\ICSharpCode.SharpZipLib.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Gallio.ReflectionShim.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Microsoft.Cci.MetadataHelper.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Microsoft.Cci.MetadataModel.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Microsoft.Cci.PdbReader.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Microsoft.Cci.PeReader.dll" />
+    <GallioMergeDependency Include="Gallio\bin\Microsoft.Cci.SourceModel.dll" />
+  </ItemGroup>
+
+  <Target 
+    Name="GallioImage_ILMerge"
+    Condition="'$(NoILMerge)'!='true'"
+    Inputs="Gallio\bin\Gallio.dll;@(GallioMergeDependency)"
+    Outputs="$(ModuleTempDir)\Gallio.dll">
+
+    <Message 
+      Text="Running ILMerge on Gallio.dll..."
+      Importance="High" />
+
+    <Exec 
+      Command="&quot;$(ToolsDir)\ILMerge\ILMerge.exe&quot; &quot;Gallio\bin\Gallio.dll&quot; @(GallioMergeDependency->'&quot;%(Identity)&quot;', ' ') /internalize &quot;/out:$(ModuleTempDir)\Gallio.dll&quot; &quot;/keyfile:$(SourceDir)\Key.snk&quot;" />
+	
+    <!-- Important: Running ILMerge changes the ModuleVersionId of Gallio.dll so we need to regenerate Gallio.XmlSerializers.dll -->
+    <SGenMultipleTypes 
+      BuildAssemblyName="Gallio.dll" 
+      BuildAssemblyPath="$(ModuleTempDir)" 
+      References="" 
+      KeyFile="..\Key.snk" />
+      
+  </Target>
+
+  <Target 
+    Name="GallioImage_NoILMerge"
+    Condition="'$(NoILMerge)'=='true'">
+    
+    <Copy 
+      SourceFiles="Gallio.Reports\bin\Gallio.Reports.dll;Gallio.Reports\bin\Gallio.Reports.pdb"
+      DestinationImagePath="$(ModuleTempDir)" />
+    
+    <Copy 
+      SourceFiles="Gallio\bin\Gallio.dll;Gallio\bin\Gallio.pdb;Gallio\bin\Gallio.XmlSerializers.dll"
+      DestinationImagePath="$(ModuleTempDir)" />
+
+    <Copy 
+      SourceFiles="Gallio40\bin\Gallio40.dll;Gallio40\bin\Gallio40.pdb;Gallio40\bin\Gallio40.XmlSerializers.dll"
+      DestinationImagePath="$(ModuleTempDir)" />
+	  
+    <Copy 
+      SourceFiles="@(GallioMergeDependency)"
+      DestinationImagePath="$(ModuleImageDir)\bin" />
+      
+    <Copy 
+      SourceFiles="@(GallioReportsMergeDependency)"
+      DestinationImagePath="$(ModuleImageDir)\bin" />
+
+  </Target>
+</Project>

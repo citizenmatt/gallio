@@ -1,0 +1,747 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6C4AEA1A-CF85-4574-B24A-2C264ED0FEC3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gallio.Icarus</RootNamespace>
+    <AssemblyName>Gallio.Icarus</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>Resources\Gallio.Icarus.ico</ApplicationIcon>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SGenUseProxyTypes>false</SGenUseProxyTypes>
+    <SGenShouldGenerateSerializer>true</SGenShouldGenerateSerializer>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/Gallio.Icarus/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <RootDir>$(MSBuildProjectDirectory)\..\..\..\..</RootDir>
+    <CustomAfterMicrosoftCommonTargets>$(RootDir)\bin\Custom.After.Microsoft.Common.targets</CustomAfterMicrosoftCommonTargets>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio.Icarus.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio.Icarus.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aga.Controls, Version=1.6.1.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Gallio\libs\Aga.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.2.1.6466, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <HintPath>..\libs\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.31030, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Annotations\AnnotationsPackage.cs" />
+    <Compile Include="Annotations\AnnotationsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnotationsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Annotations\AnnotationsWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Annotations\AnnotationsWindow.Designer.cs">
+      <DependentUpon>AnnotationsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\AddFilesCommand.cs" />
+    <Compile Include="Commands\ApplyFilterCommand.cs" />
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\ConvertSavedReportCommand.cs" />
+    <Compile Include="Commands\ICommandFactory.cs" />
+    <Compile Include="Commands\LoadPackageCommand.cs" />
+    <Compile Include="Commands\DeleteAllReportsCommand.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\DeleteFilterCommand.cs" />
+    <Compile Include="Commands\DeleteReportCommand.cs" />
+    <Compile Include="Commands\GenerateReportCommand.cs" />
+    <Compile Include="Commands\NewProjectCommand.cs" />
+    <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\OpenReportCommand.cs" />
+    <Compile Include="Commands\RefreshTestTreeCommand.cs" />
+    <Compile Include="Commands\ReloadCommand.cs" />
+    <Compile Include="Controllers\ProgressEvent.cs" />
+    <Compile Include="Controllers\SavingProject.cs" />
+    <Compile Include="ControlPanel\ShutdownPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\ShutdownPane.Designer.cs">
+      <DependentUpon>ShutdownPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\ShutdownPaneProvider.cs" />
+    <Compile Include="ControlPanel\ExecutionLogPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\ExecutionLogPane.Designer.cs">
+      <DependentUpon>ExecutionLogPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\ExecutionLogPaneProvider.cs" />
+    <Compile Include="Events\OptionsChanged.cs" />
+    <Compile Include="ExecutionLog\ExecutionLogController.cs" />
+    <Compile Include="ExecutionLog\ExecutionLogPackage.cs" />
+    <Compile Include="ExecutionLog\ExecutionLogWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ExecutionLog\ExecutionLogWindow.Designer.cs">
+      <DependentUpon>ExecutionLogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExecutionLog\IExecutionLogController.cs" />
+    <Compile Include="Filters\FilterController.cs" />
+    <Compile Include="Filters\FiltersPackage.cs" />
+    <Compile Include="Filters\FiltersView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Filters\FiltersView.Designer.cs">
+      <DependentUpon>FiltersView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Filters\IFilterController.cs" />
+    <Compile Include="Models\AlphanumComparatorFast.cs" />
+    <Compile Include="ProjectExplorer\ProjectExplorerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectExplorerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectExplorer\ProjectExplorerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectExplorer\ProjectExplorerView.Designer.cs">
+      <DependentUpon>ProjectExplorerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectExplorer\ProjectExplorerPackage.cs" />
+    <Compile Include="ProjectProperties\Controller.cs" />
+    <Compile Include="ProjectProperties\IController.cs" />
+    <Compile Include="ProjectProperties\IModel.cs" />
+    <Compile Include="ProjectProperties\IView.cs" />
+    <Compile Include="ProjectProperties\Model.cs" />
+    <Compile Include="ProjectProperties\Package.cs" />
+    <Compile Include="ProjectProperties\View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProjectProperties\View.Designer.cs">
+      <DependentUpon>View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Projects\IProjectUserOptionsController.cs" />
+    <Compile Include="Projects\ProjectReloadPackage.cs" />
+    <Compile Include="Projects\UserOptions.cs" />
+    <Compile Include="Projects\ProjectUserOptionsController.cs" />
+    <Compile Include="Projects\UserOptionsLoaded.cs" />
+    <Compile Include="Projects\UserOptionsSaved.cs" />
+    <Compile Include="Reload\ReloadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reload\ReloadDialog.Designer.cs">
+      <DependentUpon>ReloadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reload\ReloadPackage.cs" />
+    <Compile Include="RuntimeLog\RuntimeLogResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RuntimeLogResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RuntimeLog\RuntimeLogPackage.cs" />
+    <Compile Include="RuntimeLog\IRuntimeLogController.cs" />
+    <Compile Include="RuntimeLog\RuntimeLogController.cs" />
+    <Compile Include="RuntimeLog\RuntimeLogWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RuntimeLog\RuntimeLogWindow.Designer.cs">
+      <DependentUpon>RuntimeLogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Runtime\IPluginScanner.cs" />
+    <Compile Include="Search\IModel.cs" />
+    <Compile Include="Specifications\MetadataSpecification.cs" />
+    <Compile Include="Specifications\NameSpecification.cs" />
+    <Compile Include="Specifications\ISpecificationFactory.cs" />
+    <Compile Include="Search\Model.cs" />
+    <Compile Include="Specifications\NamespaceSpecification.cs" />
+    <Compile Include="Specifications\SpecificationFactory.cs" />
+    <Compile Include="TestExplorer\ITestExplorerController.cs" />
+    <Compile Include="TestExplorer\ITestExplorerModel.cs" />
+    <Compile Include="TestExplorer\TestExplorerController.cs" />
+    <Compile Include="TestExplorer\TestExplorerModel.cs" />
+    <Compile Include="TestExplorer\TestExplorerPackage.cs" />
+    <Compile Include="TestExplorer\TestExplorerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestExplorerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TestExplorer\TestExplorerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestExplorer\TestExplorerView.Designer.cs">
+      <DependentUpon>TestExplorerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestResults\ITestResultsController.cs" />
+    <Compile Include="TestResults\TestResultsPackage.cs" />
+    <Compile Include="TestResults\TestResults.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TestResults\TestResults.Designer.cs">
+      <DependentUpon>TestResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestResults\TestResultsController.cs" />
+    <Compile Include="TestResults\TestResultsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestResultsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TestResults\TestStepComparer.cs" />
+    <Compile Include="Controls\NodeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NodeIcon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NodeTypeImageCache.cs" />
+    <Compile Include="Controls\TestKindIcon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestNodeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestStatusNodeIcon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Events\TestsFailed.cs" />
+    <Compile Include="Events\ProjectSaved.cs" />
+    <Compile Include="Events\ProjectLoaded.cs" />
+    <Compile Include="Events\TestStepFinished.cs" />
+    <Compile Include="Events\ExploreStarted.cs" />
+    <Compile Include="Events\RunFinished.cs" />
+    <Compile Include="Events\RunStarted.cs" />
+    <Compile Include="Events\Reloading.cs" />
+    <Compile Include="Commands\RemoveAllFilesCommand.cs" />
+    <Compile Include="Commands\RemoveFileCommand.cs" />
+    <Compile Include="Commands\ResetTestsCommand.cs" />
+    <Compile Include="Commands\RestoreFilterCommand.cs" />
+    <Compile Include="Commands\RunTestsCommand.cs" />
+    <Compile Include="Commands\SaveFilterCommand.cs" />
+    <Compile Include="Commands\SaveProjectCommand.cs" />
+    <Compile Include="Commands\ShowReportCommand.cs" />
+    <Compile Include="Commands\ViewSourceCodeCommand.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Annotations\AnnotationsController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="ApplicationShutdown.cs" />
+    <Compile Include="Controllers\EventArgs\FileChangedEventArgs.cs" />
+    <Compile Include="Controllers\EventArgs\ExecutionLogUpdatedEventArgs.cs" />
+    <Compile Include="Controllers\EventArgs\ShowSourceCodeEventArgs.cs" />
+    <Compile Include="Controllers\IAboutController.cs" />
+    <Compile Include="Controllers\IApplicationController.cs" />
+    <Compile Include="Annotations\IAnnotationsController.cs" />
+    <Compile Include="Controllers\Interfaces\IReportController.cs" />
+    <Compile Include="Controllers\Interfaces\ISourceCodeController.cs" />
+    <Compile Include="Controllers\IProgressController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\NotifyController.cs" />
+    <Compile Include="Controllers\ProgressController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SourceCodeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="ControlPanel\TestRunnerFactoryPaneProvider.cs" />
+    <Compile Include="ControlPanel\TestRunnerFactoryPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\TestRunnerFactoryPane.Designer.cs">
+      <DependentUpon>TestRunnerFactoryPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TestRunnerExtensionsPaneProvider.cs" />
+    <Compile Include="ControlPanel\ProgressMonitoringPaneProvider.cs" />
+    <Compile Include="ControlPanel\ProgressMonitoringPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\ProgressMonitoringPane.Designer.cs">
+      <DependentUpon>ProgressMonitoringPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\ReportsPaneProvider.cs" />
+    <Compile Include="ControlPanel\ReportsPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\ReportsPane.Designer.cs">
+      <DependentUpon>ReportsPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TestRunnerExtensionsPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\TestRunnerExtensionsPane.Designer.cs">
+      <DependentUpon>TestRunnerExtensionsPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TestStatusPaneProvider.cs" />
+    <Compile Include="ControlPanel\TestStatusPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\TestStatusPane.Designer.cs">
+      <DependentUpon>TestStatusPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\StartupPaneProvider.cs" />
+    <Compile Include="ControlPanel\StartupPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\StartupPane.Designer.cs">
+      <DependentUpon>StartupPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TestExplorerPaneProvider.cs" />
+    <Compile Include="ControlPanel\TestExplorerPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\TestExplorerPane.Designer.cs">
+      <DependentUpon>TestExplorerPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TreeViewCategoryPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPanel\TreeViewCategoryPane.Designer.cs">
+      <DependentUpon>TreeViewCategoryPane.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPanel\TreeViewCategoryPaneProvider.cs" />
+    <Compile Include="Controls\PropertiesTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\FilterService.cs" />
+    <Compile Include="Services\IFilterService.cs" />
+    <Compile Include="TreeBuilders\TreeBuilderTraits.cs" />
+    <Compile Include="Utilities\TestRunnerExtensionFactory.cs" />
+    <Compile Include="Utilities\ITestRunnerExtensionFactory.cs" />
+    <Compile Include="WindowManager\MenuList.cs" />
+    <Compile Include="WindowManager\MenuManager.cs" />
+    <Compile Include="WindowManager\IMenuList.cs" />
+    <Compile Include="WindowManager\IMenuManager.cs" />
+    <Compile Include="WindowManager\IWindowManager.cs" />
+    <Compile Include="WindowManager\Location.cs" />
+    <Compile Include="Models\FilterTestStatusEvent.cs" />
+    <Compile Include="Models\ITestStatusFilteredTreeModel.cs" />
+    <Compile Include="Events\TestsReset.cs" />
+    <Compile Include="Models\TestStatusFilteredTreeModel.cs" />
+    <Compile Include="Projects\ProjectChangedEventArgs.cs" />
+    <Compile Include="Projects\IProjectMonitor.cs" />
+    <Compile Include="Projects\ProjectReloadDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Projects\ProjectReloadDialog.Designer.cs">
+      <DependentUpon>ProjectReloadDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\BlackBoxLogger.cs" />
+    <Compile Include="Models\FilteredTreeModel.cs" />
+    <Compile Include="Models\FilterTreeEvent.cs" />
+    <Compile Include="Models\IFilteredTreeModel.cs" />
+    <Compile Include="Models\ISortedTreeModel.cs" />
+    <Compile Include="Projects\ProjectChanged.cs" />
+    <Compile Include="Projects\ProjectMonitor.cs" />
+    <Compile Include="Search\Controller.cs" />
+    <Compile Include="Search\IController.cs" />
+    <Compile Include="Search\View.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Search\View.Designer.cs">
+      <DependentUpon>View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Search\Package.cs" />
+    <Compile Include="Specifications\AnySpecification.cs" />
+    <Compile Include="Specifications\Specification.cs" />
+    <Compile Include="Specifications\OrSpecification.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
+    <Compile Include="Models\SortedTreeModel.cs" />
+    <Compile Include="Models\ITestStatistics.cs" />
+    <Compile Include="Models\SortOrder.cs" />
+    <Compile Include="Models\SortTreeEvent.cs" />
+    <Compile Include="Models\TestStatistics.cs" />
+    <Compile Include="Models\TestTreeNodes\MetadataNode.cs" />
+    <Compile Include="Models\TestTreeNodes\NamespaceNode.cs" />
+    <Compile Include="Models\TestTreeNodes\TestDataNode.cs" />
+    <Compile Include="Models\TreeModelDecorator.cs" />
+    <Compile Include="ProgressMonitoring\Win7TaskBar.cs" />
+    <Compile Include="Remoting\FileChangedHandler.cs" />
+    <Compile Include="Reports\ReportMonitor.cs" />
+    <Compile Include="Reports\ReportOptions.cs" />
+    <Compile Include="Runtime\DefaultConventionScanner.cs" />
+    <Compile Include="Specifications\AndSpecification.cs" />
+    <Compile Include="Events\ExploreFinished.cs" />
+    <Compile Include="Events\TestSelectionChanged.cs" />
+    <Compile Include="Events\TreeViewCategoryChanged.cs" />
+    <Compile Include="TreeBuilders\ITreeBuilder.cs" />
+    <Compile Include="TreeBuilders\MetadataTreeBuilder.cs" />
+    <Compile Include="TreeBuilders\NamespaceHierarchy.cs" />
+    <Compile Include="TreeBuilders\NamespaceTreeBuilder.cs" />
+    <Compile Include="TreeBuilders\TreeBuilderOptions.cs" />
+    <Compile Include="Utilities\CTaskbarList.cs" />
+    <Compile Include="Utilities\Dialogs.cs" />
+    <Compile Include="Controls\PluginTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestStatusBarStyles.cs" />
+    <Compile Include="Controls\ProjectTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestResultsList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestStatusBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TestTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\EventArgs\RuntimeLogEventArgs.cs" />
+    <Compile Include="Controllers\Interfaces\IOptionsController.cs" />
+    <Compile Include="Controllers\Interfaces\IProjectController.cs" />
+    <Compile Include="Helpers\IMenuListHelper.cs" />
+    <Compile Include="Helpers\MenuListHelper.cs" />
+    <Compile Include="Logging\IRuntimeLogger.cs" />
+    <Compile Include="Logging\RuntimeLogger.cs" />
+    <Compile Include="Models\ComponentDetailsTreeModel.cs" />
+    <Compile Include="Models\ServiceDetailsTreeModel.cs" />
+    <Compile Include="Models\PluginDetailsTreeModel.cs" />
+    <Compile Include="Models\PluginNodes\PluginDetailsNode.cs" />
+    <Compile Include="Models\PluginTreeModel.cs" />
+    <Compile Include="Models\IProjectTreeModel.cs" />
+    <Compile Include="Models\ITestTreeModel.cs" />
+    <Compile Include="Models\PluginNodes\ComponentNode.cs" />
+    <Compile Include="Models\PluginNodes\PluginNode.cs" />
+    <Compile Include="Models\PluginNodes\ServiceNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\FilesNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\FileNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\ProjectTreeNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\PropertiesNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\ReportNode.cs" />
+    <Compile Include="Models\ProjectTreeNodes\ReportsNode.cs" />
+    <Compile Include="Packages\CodeViewerPackage.cs" />
+    <Compile Include="Packages\PluginBrowserPackage.cs" />
+    <Compile Include="Remoting\IFileWatcher.cs" />
+    <Compile Include="Utilities\ITaskbarList4.cs" />
+    <Compile Include="Utilities\MRUList.cs" />
+    <Compile Include="Utilities\TBPFLAG.cs" />
+    <Compile Include="Views\CodeViewer\CodeViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\CodeViewer\CodeViewer.Designer.cs">
+      <DependentUpon>CodeViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PluginBrowser\PluginBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\PluginBrowser\PluginBrowser.Designer.cs">
+      <DependentUpon>PluginBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window.Designer.cs">
+      <DependentUpon>Window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPackage.cs" />
+    <Compile Include="Controllers\Interfaces\ITestController.cs" />
+    <Compile Include="Remoting\FileWatcher.cs" />
+    <Compile Include="Services\Interfaces\IReportService.cs" />
+    <Compile Include="Models\ProjectTreeModel.cs" />
+    <Compile Include="Models\TestTreeModel.cs" />
+    <Compile Include="Models\TestTreeNode.cs" />
+    <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="DockWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DockWindow.Designer.cs">
+      <DependentUpon>DockWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IcarusArguments.cs" />
+    <Compile Include="Paths.cs" />
+    <Compile Include="IcarusProgram.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Annotations\AnnotationsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnnotationsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Annotations\AnnotationsWindow.resx">
+      <DependentUpon>AnnotationsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\ShutdownPane.resx">
+      <DependentUpon>ShutdownPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\ExecutionLogPane.resx">
+      <DependentUpon>ExecutionLogPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DockWindow.resx">
+      <DependentUpon>DockWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExecutionLog\ExecutionLogWindow.resx">
+      <DependentUpon>ExecutionLogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filters\FiltersView.resx">
+      <DependentUpon>FiltersView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectExplorer\ProjectExplorerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProjectExplorerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectExplorer\ProjectExplorerView.resx">
+      <DependentUpon>ProjectExplorerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="WindowManager\WindowManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Gallio\Gallio.UI\Gallio.UI.vs2010.csproj">
+      <Project>{36B1F505-995B-41E7-AAC9-1E845B08F2D7}</Project>
+      <Name>Gallio.UI.vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Gallio\Gallio\Gallio.vs2010.csproj">
+      <Project>{6CAB7735-05DA-480D-9A04-50615B00F886}</Project>
+      <Name>Gallio.vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\VisualStudio\Gallio.VisualStudio.Interop\Gallio.VisualStudio.Interop.vs2010.csproj">
+      <Project>{B6912CC5-1E73-46E0-8F09-7F135924E3E2}</Project>
+      <Name>Gallio.VisualStudio.Interop.vs2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about.png" />
+    <None Include="Resources\Gallio.Icarus.ico" />
+    <None Include="Resources\MbUnit.ico" />
+    <None Include="Resources\PropertyWindow.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestExplorer\TestExplorerIcon.ico" />
+    <EmbeddedResource Include="AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\TestRunnerFactoryPane.resx">
+      <DependentUpon>TestRunnerFactoryPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\ProgressMonitoringPane.resx">
+      <DependentUpon>ProgressMonitoringPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\ReportsPane.resx">
+      <DependentUpon>ReportsPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\TestRunnerExtensionsPane.resx">
+      <DependentUpon>TestRunnerExtensionsPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\TestStatusPane.resx">
+      <DependentUpon>TestStatusPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\StartupPane.resx">
+      <DependentUpon>StartupPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\TestExplorerPane.resx">
+      <DependentUpon>TestExplorerPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPanel\TreeViewCategoryPane.resx">
+      <DependentUpon>TreeViewCategoryPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectProperties\View.resx">
+      <DependentUpon>View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projects\ProjectReloadDialog.resx">
+      <DependentUpon>ProjectReloadDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reload\ReloadDialog.resx">
+      <DependentUpon>ReloadDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RuntimeLog\RuntimeLogResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RuntimeLogResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RuntimeLog\RuntimeLogWindow.resx">
+      <DependentUpon>RuntimeLogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Search\View.resx">
+      <DependentUpon>View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestExplorer\TestExplorerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestExplorerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestExplorer\TestExplorerView.resx">
+      <DependentUpon>TestExplorerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestResults\TestResults.resx">
+      <DependentUpon>TestResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestResults\TestResultsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestResultsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CodeViewer\CodeViewer.resx">
+      <DependentUpon>CodeViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PluginBrowser\PluginBrowser.resx">
+      <DependentUpon>PluginBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window.resx">
+      <DependentUpon>Window.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="ProjectExplorer\ProjectExplorerIcon.ico" />
+    <None Include="Annotations\AnnotationsIcon.ico" />
+    <Content Include="Resources\arrow_refresh.png" />
+    <Content Include="Resources\Assembly.ico" />
+    <Content Include="Resources\Assembly.png" />
+    <Content Include="Resources\ClearAll.ico" />
+    <Content Include="Resources\cross.png" />
+    <Content Include="Resources\document-save-as.png" />
+    <Content Include="Resources\document-save.png" />
+    <Content Include="Resources\error.png" />
+    <Content Include="Resources\FailMb.ico" />
+    <Content Include="Resources\FilterFailed.ico" />
+    <Content Include="Resources\FilterPassed.ico" />
+    <Content Include="Resources\FilterSkipped.ico" />
+    <Content Include="Resources\Fixture.png" />
+    <Content Include="Resources\folder_open.png" />
+    <Content Include="Resources\Graph.png" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest" />
+    <None Include="Gallio.Icarus.plugin" />
+    <None Include="Resources\Group.png" />
+    <Content Include="Resources\help-browser.png" />
+    <Content Include="Resources\LinkToMBU.png" />
+    <Content Include="Resources\list-add.png" />
+    <Content Include="Resources\list-remove.png" />
+    <Content Include="Resources\LogStream.ico" />
+    <Content Include="Resources\MbUnitLogo.png" />
+    <Content Include="Resources\MbUnitLogoText.png" />
+    <Content Include="Resources\Namespace.png" />
+    <Content Include="Resources\new.png" />
+    <Content Include="Resources\OpenInVS.ico" />
+    <Content Include="Resources\Options.ico" />
+    <Content Include="Resources\PassMb.ico" />
+    <None Include="Resources\pillar.png" />
+    <None Include="Resources\PropertiesHS.png" />
+    <None Include="Resources\Properties.bmp" />
+    <None Include="Resources\props.ico" />
+    <None Include="Resources\Properties.ico" />
+    <Content Include="Resources\Reload.ico" />
+    <Content Include="Resources\Report.ico" />
+    <Content Include="Resources\Sort.png" />
+    <Content Include="Resources\SortUp.png" />
+    <Content Include="Resources\start.png" />
+    <Content Include="Resources\Statistics.ico" />
+    <Content Include="Resources\stop.png" />
+    <Content Include="Resources\Test.png" />
+    <Content Include="Resources\text-x-python.png" />
+    <Content Include="Resources\tick.png" />
+    <None Include="Resources\XmlFile.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

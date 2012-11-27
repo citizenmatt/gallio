@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include ..\..\Installer\Common.wxi ?>
+    
+  <Fragment>
+    <DirectoryRef Id="binFolder" FileSource="$(var.GallioTargetDir)\bin\">
+      <Directory Id="CSUnitAdapter" Name="CSUnit">
+        <Component Id="Gallio.CSUnitAdapter" Guid="{F8EDE10A-7DE4-4285-91A0-A33694A3ED41}" Win64="$(var.Win64Binary)">
+          <File Name="Gallio.CSUnitAdapter.dll" />
+          <File Name="Gallio.CSUnitAdapter.plugin" />
+          <File Name="csUnit.dll" />
+          <File Name="csUnit.Common.dll" />
+          <File Name="csUnit.Core.dll" />
+          <File Name="csUnit.Interfaces.dll" />
+	  <File Name="csUnit.dll.tdnet" />
+          <File Id="csUnit.License.txt" Name="license.txt" />
+          <File Id="csUnit.Readme.txt" Name="Readme.txt" />
+        </Component>
+
+        <Directory Id="csUnit.Resources" Name="Resources">
+          <Component Id="Gallio.CSUnitAdapter.Resources" Guid="{4F53AEC4-41C3-4c4e-9A3C-1A382871B3DD}" Win64="$(var.Win64Binary)">
+            <File Name="csUnit.ico" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='feat_CSUnitAdapter' Title='csUnit Adapter' Level='1' AllowAdvertise="no"
+        Description='Installs the csUnit adapter.  Enables Gallio to run csUnit tests.'>
+      <ComponentRef Id="Gallio.CSUnitAdapter"/>
+      <ComponentRef Id="Gallio.CSUnitAdapter.Resources"/>
+    </Feature>
+  </Fragment>
+</Wix>

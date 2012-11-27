@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  <Import Project="ReSharper40.targets" />
+
+  <ItemGroup Condition="$(ReSharper40Installed)">
+    <CSharpProject Include="Gallio.ReSharperRunner\Gallio.ReSharperRunner40$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.ReSharperRunner.Tests\Gallio.ReSharperRunner40.Tests$(ProjectVariant).csproj" />
+
+    <PluginFile Include="Gallio.ReSharperRunner\Gallio.ReSharperRunner40.plugin">
+      <ImagePath>bin\ReSharper\v4.0</ImagePath>
+    </PluginFile>
+    <AssemblyFile Include="Gallio.ReSharperRunner\bin\v4.0\Gallio.ReSharperRunner40.dll">
+      <ImagePath>bin\ReSharper\v4.0</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.ReSharperRunner\bin\v4.0\Gallio.ReSharperRunner40.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+
+    <File Include="Gallio.ReSharperRunner\Resources\resharper.ico">
+      <ImagePath>bin\ReSharper\v4.0\Resources</ImagePath>
+    </File>
+
+    <TestAssembly Include="Gallio.ReSharperRunner.Tests\bin\v4.0\Gallio.ReSharperRunner40.Tests.dll" />
+
+    <Feature Include="FEATURE_RESHARPER_RUNNER" />
+    <Feature Include="FEATURE_RESHARPER_RUNNER_40" />
+  </ItemGroup>
+</Project>

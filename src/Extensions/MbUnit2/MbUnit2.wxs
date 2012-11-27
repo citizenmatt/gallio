@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include ..\..\Installer\Common.wxi ?>
+
+    <Fragment>
+        <DirectoryRef Id="binFolder" FileSource="$(var.GallioTargetDir)\bin\">
+            <Directory Id="MbUnit2" Name="MbUnit2">
+                <Component Id="Gallio.MbUnit2Adapter" Guid="489abfa0-93a1-4f46-8685-e428d4d75120" Win64="$(var.Win64Binary)">
+                    <File Name="Gallio.MbUnit2Adapter.dll" KeyPath="yes" />
+                    <File Name="Gallio.MbUnit2Adapter.plugin" />
+                    <File Name="MbUnit.Framework.dll" />
+                    <File Name="MbUnit.Framework.dll.tdnet" />
+                    <File Name="MbUnit.Framework.xml" />
+                    <File Name="MbUnit.Framework.2.0.dll" />
+                    <File Name="MbUnit.Framework.2.0.xml" />
+                    <File Name="QuickGraph.dll" />
+                    <File Name="QuickGraph.xml" />
+                    <File Name="QuickGraph.Algorithms.dll" />
+                    <File Name="QuickGraph.Algorithms.xml" />
+                    <File Id="MbUnit2.Readme.txt" Name="Readme.txt" />
+                    <File Name="Refly.dll" />
+                    <File Name="Refly.xml" />
+                    <File Name="TestFu.dll" />
+                    <File Name="TestFu.xml" />
+                </Component>
+
+                <Directory Id="MbUnit2.Resources" Name="Resources">
+                    <Component Id="Gallio.MbUnit2Adapter.Resources" Guid="{FB03826A-BEC8-470d-8F27-7F3CE846F879}" Win64="$(var.Win64Binary)">
+                        <File Id="Gallio.MbUnit2Adapter.Resources.MbUnit.ico" Name="MbUnit.ico" KeyPath="yes" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+
+        <Feature Id='feat_MbUnit2Adapter' Title='MbUnit v2 Adapter' Level='1' AllowAdvertise="no"
+            Description='Installs the MbUnit v2 adapter.  Enables Gallio to run MbUnit v2 tests.'>
+            <ComponentRef Id="Gallio.MbUnit2Adapter"/>
+            <ComponentRef Id="Gallio.MbUnit2Adapter.Resources"/>
+        </Feature>
+    </Fragment>
+</Wix>

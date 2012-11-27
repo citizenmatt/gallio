@@ -1,0 +1,82 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <Module Include="$(SourceDir)\Gallio\Gallio.module" />
+    <Module Include="$(SourceDir)\MbUnit\MbUnit.module" />
+  
+    <CSharpProject Include="Archimedes\Archimedes$(ProjectVariant).csproj" />
+    <CSharpProject Include="Archimedes.Tests\Archimedes.Tests$(ProjectVariant).csproj" />
+    <CSharpProject Include="Archimedes.Client\Archimedes.Client$(ProjectVariant).csproj" />
+    <CSharpProject Include="Archimedes.Web\Archimedes.Web$(ProjectVariant).csproj">
+	  <ImageContentPath>bin\Archimedes\Web</ImageContentPath>
+	</CSharpProject>
+    <CSharpProject Include="Archimedes.Web.Tests\Archimedes.Web.Tests$(ProjectVariant).csproj" />
+    
+	<AssemblyFile Include="Archimedes\bin\Archimedes.dll">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</AssemblyFile>
+	<PdbFile Include="Archimedes\bin\Archimedes.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+	</PdbFile>
+	<XmlDocFile Include="Archimedes\bin\Archimedes.xml">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</XmlDocFile>
+	<PluginFile Include="Archimedes\Archimedes.plugin">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</PluginFile>
+	<File Include="Archimedes\Resources\Archimedes.ico">
+	  <ImagePath>bin\Archimedes\Resources</ImagePath>
+	</File>
+	
+	<AssemblyFile Include="Archimedes.Client\bin\Archimedes.Client.exe">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</AssemblyFile>
+    <PdbFile Include="Archimedes.Client\bin\Archimedes.Client.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+	<ConfigFile Include="Archimedes.Client\Archimedes.Client.exe.config">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</ConfigFile>
+	<PluginFile Include="Archimedes.Client\Archimedes.Client.plugin">
+	  <ImagePath>bin\Archimedes</ImagePath>
+	</PluginFile>
+	
+	<AssemblyFile Include="Archimedes.Web\bin\Archimedes.Web.dll">
+	  <ImagePath>bin\Archimedes\Web\bin</ImagePath>
+	</AssemblyFile>
+    <PdbFile Include="Archimedes.Web\bin\Archimedes.Web.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+	<PluginFile Include="Archimedes.Web\Archimedes.Web.plugin">
+	  <ImagePath>bin\Archimedes\Web</ImagePath>
+	</PluginFile>
+		
+    <TestAssembly Include="Archimedes.Tests\bin\Archimedes.Tests.dll" />
+    <TestAssembly Include="Archimedes.Web.Tests\bin\Archimedes.Web.Tests.dll" />
+	
+    <!-- Not ready for prime time.
+	<Feature Include="FEATURE_ARCHIMEDES" />
+    -->
+  </ItemGroup>
+  
+  <Target Name="AfterImage">
+    <ItemGroup>
+      <WebFiles Include="$(ModuleImageDir)\bin\Archimedes\Web\**\*" />
+
+      <Token Include="WebFilesToken">
+        <ReplacementValue>@(WebFiles->'&lt;file path="%(RecursiveDir)%(Filename)%(Extension)"/&gt;', '%0A    ')</ReplacementValue>
+      </Token>
+    </ItemGroup>
+
+    <TemplateFile Template="$(ModuleImageDir)\bin\Archimedes\Web\Archimedes.Web.plugin"
+		  Tokens="@(Token)" />
+    <Delete Files="$(ModuleImageDir)\bin\Archimedes\Web\Archimedes.Web.plugin" />
+    <Move SourceFiles="$(ModuleImageDir)\bin\Archimedes\Web\Archimedes.Web.out"
+          DestinationFiles="$(ModuleImageDir)\bin\Archimedes\Web\Archimedes.Web.plugin" />
+  </Target>
+  
+  <Target Name="BeforeDist">
+    <Exec Command="&quot;$(ToolsDir)\Wix\heat.exe&quot; dir &quot;$(ModuleImageDir)\bin\Archimedes\Web&quot; -cg ComponentGroup -var var.Archimedes.Web.source -gg -ke -nologo -sfrag -sreg -t:Archimedes.Web.xslt -out Archimedes.Web.wxi" />
+  </Target>
+</Project>

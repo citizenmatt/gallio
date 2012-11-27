@@ -1,0 +1,251 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Version Condition="'$(Version)'==''">0.0.0.0</Version>
+    <MajorVersion Condition="'$(MajorVersion)'==''">0</MajorVersion>
+    <MinorVersion Condition="'$(MinorVersion)'==''">0</MinorVersion>
+    <BuildNumber Condition="'$(BuildNumber)'==''">0</BuildNumber>
+    <ProductVersion>0.0</ProductVersion>
+    <ProjectGuid>{a00a00a0-a0a0-4355-a2e3-b48284792334}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>GallioBundle-$(Version)-Setup-$(Platform)</OutputName>
+    <OutputType>Package</OutputType>
+    <Cultures>en-US</Cultures>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.0\Wix.targets</WixTargetsPath>
+    <TargetDir Condition="'$(TargetDir)'==''">$(MSBuildProjectDirectory)\..\..\build\image</TargetDir>
+    <SetMsiAssemblyNameFileVersion>true</SetMsiAssemblyNameFileVersion>
+    <ExactAssemblyVersions>true</ExactAssemblyVersions>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;GallioTargetDir=$(GallioTargetDir);Version=$(Version);MajorVersion=$(MajorVersion);MinorVersion=$(MinorVersion);BuildNumber=$(BuildNumber)</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressIces>ICE69;ICE61;ICE30</SuppressIces>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>GallioTargetDir=$(GallioTargetDir);Version=$(Version);MajorVersion=$(MajorVersion);MinorVersion=$(MinorVersion);BuildNumber=$(BuildNumber)</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressIces>ICE69;ICE61;ICE30</SuppressIces>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>Debug;GallioTargetDir=$(GallioTargetDir);Version=$(Version);MajorVersion=$(MajorVersion);MinorVersion=$(MinorVersion);BuildNumber=$(BuildNumber)</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressIces>ICE69;ICE61;ICE30</SuppressIces>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DefineConstants>GallioTargetDir=$(GallioTargetDir);Version=$(Version);MajorVersion=$(MajorVersion);MinorVersion=$(MinorVersion);BuildNumber=$(BuildNumber)</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressIces>ICE69;ICE61;ICE30</SuppressIces>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>    
+  <ItemGroup>
+    <Compile Include="WixUI_Gallio.wxs" />
+    <Compile Include="GallioBundle.wxs" />
+    <Compile Include="VSExtension2010.wxs">
+      <Link>VSExtension2010.wxs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Gallio.wxs">
+      <Link>Gallio.wxs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Samples\GallioSamples.wxs">
+      <Link>GallioSamples.wxs</Link>
+    </Compile>
+    <Compile Include="..\MbUnit\MbUnit.wxs">
+      <Link>MbUnit.wxs</Link>
+    </Compile>
+    <Compile Include="..\MbUnit\Templates\VS2005\MbUnitTemplatesVS2005.wxs">
+      <Link>MbUnitTemplatesVS2005.wxs</Link>
+    </Compile>
+    <Compile Include="..\MbUnit\Templates\VS2008\MbUnitTemplatesVS2008.wxs">
+      <Link>MbUnitTemplatesVS2008.wxs</Link>
+    </Compile>
+    <Compile Include="..\MbUnit\Templates\VS2010\MbUnitTemplatesVS2010.wxs">
+      <Link>MbUnitTemplatesVS2010.wxs</Link>
+    </Compile>
+    <Compile Include="..\MbUnit\Samples\MbUnitSamples.wxs">
+      <Link>MbUnitSamples.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Ambience\Ambience.wxs">
+      <Link>Ambience.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\AutoCAD\AutoCAD.wxs">
+      <Link>AutoCAD.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ControlPanel\ControlPanel.wxs">
+      <Link>ControlPanel.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Copy\Copy.wxs">
+      <Link>Copy.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\DLR\DLR.wxs">
+      <Link>DLR.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Echo\Echo.wxs">
+      <Link>Echo.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Icarus\Icarus.wxs">
+      <Link>Icarus.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\PowerShell\PowerShell.wxs">
+      <Link>PowerShell.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper.wxs">
+      <Link>ReSharper.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper31.wxs">
+      <Link>ReSharper31.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper40.wxs">
+      <Link>ReSharper40.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper41.wxs">
+      <Link>ReSharper41.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper45.wxs">
+      <Link>ReSharper45.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\ReSharper\ReSharper50.wxs">
+      <Link>ReSharper50.wxs</Link>
+    </Compile>
+	<Compile Include="..\Extensions\ReSharper\ReSharper51.wxs">
+      <Link>ReSharper51.wxs</Link>
+    </Compile>
+	<Compile Include="..\Extensions\ReSharper\ReSharper60.wxs">
+      <Link>ReSharper60.wxs</Link>
+    </Compile>	
+	<Compile Include="..\Extensions\ReSharper\ReSharper61.wxs">
+      <Link>ReSharper61.wxs</Link>
+    </Compile>
+	<Compile Include="..\Extensions\ReSharper\ReSharper70.wxs">
+      <Link>ReSharper70.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\RSpec\RSpec.wxs">
+      <Link>RSpec.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\TDNet\TDNet.wxs">
+      <Link>TDNet.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\MsBuild\MsBuild.wxs">
+      <Link>MsBuild.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NAnt\NAnt.wxs">
+      <Link>NAnt.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\CSUnit\CSUnit.wxs">
+      <Link>CSUnit.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\MbUnit2\MbUnit2.wxs">
+      <Link>MbUnit2.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NUnit\NUnit.wxs">
+      <Link>NUnit.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NUnit\NUnit248.wxs">
+      <Link>NUnit248.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NUnit\NUnit253.wxs">
+      <Link>NUnit253.wxs</Link>
+    </Compile>
+	<Compile Include="..\Extensions\NUnit\NUnit254-10.wxs">
+      <Link>NUnit254-10.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NUnit\NUnitLatest.wxs">
+      <Link>NUnitLatest.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Xunit\Xunit.wxs">
+      <Link>Xunit.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Xunit\Xunit161.wxs">
+      <Link>Xunit161.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Xunit\XunitLatest.wxs">
+      <Link>XunitLatest.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\MbUnitCpp\MbUnitCpp.wxs">
+      <Link>MbUnitCpp.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\MSTest\MSTest.wxs">
+      <Link>MSTest.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Navigator\Navigator.wxs">
+      <Link>Navigator.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\NCover\NCover.wxs">
+      <Link>NCover.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\TeamCity\TeamCity.wxs">
+      <Link>TeamCity.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\TypeMock\TypeMock.wxs">
+      <Link>TypeMock.wxs</Link>
+    </Compile>
+	<Compile Include="..\Extensions\PartCover\PartCover.wxs">
+      <Link>PartCover.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\VisualStudio\VisualStudio.wxs">
+      <Link>VisualStudio.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\VisualStudio\VisualStudio90.wxs">
+      <Link>VisualStudio90.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\VisualStudio\VisualStudio100.wxs">
+      <Link>VisualStudio100.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\VisualStudio\VisualStudio.Interop.wxs">
+      <Link>VisualStudio.Interop.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\CCNet\CCNet.wxs">
+      <Link>CCNet.wxs</Link>
+    </Compile>
+    <Compile Include="..\Extensions\Utility\Utility.wxs">
+      <Link>Utility.wxs</Link>
+    </Compile>
+    <Compile Include="..\Archimedes\Archimedes.wxs">
+      <Link>Archimedes.wxs</Link>
+    </Compile>
+    <Compile Include="..\SDK\SDK.wxs">
+      <Link>SDK.wxs</Link>
+    </Compile>	
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+    </WixExtension>
+    <WixExtension Include="WixPSExtension">
+      <HintPath>$(WixExtDir)\WixPSExtension.dll</HintPath>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension.dll">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+    </WixExtension>
+    <WixExtension Include="WixUtilExtension.dll">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+    </WixExtension>
+    <WixExtension Include="WixVSExtension.dll">
+      <HintPath>$(WixExtDir)\WixVSExtension.dll</HintPath>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+    To modify your build process, add your task inside one of the targets below and uncomment it.
+    Other similar extension points exist, see Wix.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+  <Target Name="CheckWxs">
+    <!-- Run WixCop on all the source files to check for issues. -->
+    <Exec Command="&quot;$(WixToolPath)\WixCop.exe&quot; -set1WixCop.settings @(Compile, ' ')" ContinueOnError="true" />
+  </Target>
+</Project>

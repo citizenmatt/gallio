@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.RSpecAdapter"
+        recommendedInstallationPath="RSpec"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>RSpec Adapter Plugin</name>
+    <version>0.0.0.0</version>
+    <description>Provides support for running RSpec tests.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+    <dependency pluginId="Gallio.DLRIntegration" />
+  </dependencies>
+
+  <files>
+    <file path="Gallio.RSpecAdapter.plugin" />
+    <file path="Gallio.RSpecAdapter.dll" />
+    <!-- The following tokens are replaced during the build. -->
+    ${LibsFilesToken}
+    ${ScriptsFilesToken}
+  </files>
+
+  <assemblies>
+    <assembly fullName="Gallio.RSpecAdapter, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.RSpecAdapter.dll"
+              qualifyPartialName="true" />
+  </assemblies>
+
+  <components>    
+    <component componentId="RSpecAdapter.FileTypeRecognizers.RSpecSource"
+               serviceId="Gallio.FileTypeRecognizer">
+      <traits>
+        <id>RSpecSource</id>
+        <superTypeId>RubySource</superTypeId>
+        <description>An RSpec source file.</description>
+        <fileNameRegex>.*_spec\.rb</fileNameRegex>
+      </traits>
+    </component>
+
+    <component componentId="RSpecAdapter.TestFramework"
+               serviceId="Gallio.TestFramework"
+               componentType="Gallio.RSpecAdapter.Model.RSpecTestFramework, Gallio.RSpecAdapter">
+      <traits>
+        <name>RSpec</name>
+        <fileTypes>RSpecSource</fileTypes>
+      </traits>
+    </component>
+
+    <component componentId="RSpecAdapter.TestKinds.File"
+               serviceId="Gallio.TestKind">
+      <traits>
+        <name>RSpec File</name>
+        <description>An RSpec file.</description>
+        <icon>plugin://Gallio/Resources/Assembly.ico</icon>
+      </traits>
+    </component>
+
+    <component componentId="RSpecAdapter.TestKinds.ExampleGroup"
+               serviceId="Gallio.TestKind">
+      <traits>
+        <name>RSpec Example Group</name>
+        <description>An RSpec example group.</description>
+        <icon>plugin://Gallio/Resources/Fixture.ico</icon>
+      </traits>
+    </component>
+
+    <component componentId="RSpecAdapter.TestKinds.Example"
+               serviceId="Gallio.TestKind">
+      <traits>
+        <name>RSpec Example</name>
+        <description>An RSpec example.</description>
+        <icon>plugin://Gallio/Resources/Test.ico</icon>
+      </traits>
+    </component>
+  </components>
+</plugin>

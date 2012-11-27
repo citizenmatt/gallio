@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <Module Include="*\*.module">
+      <Inherit>true</Inherit>
+    </Module>
+  </ItemGroup>
+</Project>

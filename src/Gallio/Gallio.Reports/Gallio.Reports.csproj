@@ -1,0 +1,140 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{399C33BF-A9F7-4390-8F9C-8EECF7814123}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gallio.Reports</RootNamespace>
+    <AssemblyName>Gallio.Reports</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio.Reports.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio.Reports.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NVelocity, Version=1.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\NVelocity\bin\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseReportFormatter.cs" />
+    <Compile Include="VtlReportFormatter.cs" />
+    <Compile Include="MHtmlReportFormatter.cs" />
+    <Compile Include="MultipartMimeReportContainer.cs" />
+    <Compile Include="NamespaceDoc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportResourcesInstaller.cs" />
+    <Compile Include="Vtl\FormatContentsHelper.cs" />
+    <Compile Include="Vtl\FormatPagingHelper.cs" />
+    <Compile Include="Vtl\MultipleFilesVtlReportWriter.cs" />
+    <Compile Include="Vtl\NamespaceDoc.cs" />
+    <Compile Include="Vtl\PagerRenderer.cs" />
+    <Compile Include="Vtl\TestStepRunNode.cs" />
+    <Compile Include="Vtl\VtlReportWriter.cs" />
+    <Compile Include="Vtl\FormatHtmlHelper.cs" />
+    <Compile Include="Vtl\FormatTextHelper.cs" />
+    <Compile Include="Vtl\SingleFileVtlReportWriter.cs" />
+    <Compile Include="Vtl\TestStepRunTreeStatistics.cs" />
+    <Compile Include="Vtl\FormatHelper.cs" />
+    <Compile Include="Vtl\DefaultVelocityEngineFactory.cs" />
+    <Compile Include="Vtl\IVelocityEngineFactory.cs" />
+    <Compile Include="XmlReportFormatter.cs" />
+    <Compile Include="XsltReportFormatter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gallio\Gallio.csproj">
+      <Project>{6CAB7735-05DA-480D-9A04-50615B00F886}</Project>
+      <Name>Gallio %28Gallio\Gallio%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\css\Gallio-Report.css" />
+    <Content Include="Resources\js\player.swf" />
+    <Content Include="Resources\img\UnknownTestKind.png" />
+    <Content Include="Resources\img\Failed.gif" />
+    <Content Include="Resources\img\FullStop.gif" />
+    <Content Include="Resources\img\GallioTestReportHeader.png" />
+    <Content Include="Resources\img\header-background.gif" />
+    <Content Include="Resources\img\Ignored.gif" />
+    <Content Include="Resources\img\Minus.gif" />
+    <Content Include="Resources\img\Passed.gif" />
+    <Content Include="Resources\img\Plus.gif" />
+    <Content Include="Resources\js\expressInstall.swf" />
+    <Content Include="Resources\js\Gallio-Report.js" />
+    <Content Include="Resources\js\swfobject.js" />
+    <Content Include="Resources\xsl\Gallio-Report.txt-common.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.txt-condensed.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.ccnet-details-condensed.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.ccnet-details.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.common.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.html+xhtml.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.html-condensed.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.html.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.txt.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.xhtml-condensed.xsl" />
+    <Content Include="Resources\xsl\Gallio-Report.xhtml.xsl" />
+    <Content Include="Resources\vm\Gallio-Report.txt-condensed.vm" />
+    <Content Include="Resources\vm\Gallio-Report.txt.vm" />
+    <Content Include="Resources\vm\Gallio-Report.txt-common.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html-condensed.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html.vm" />
+    <Content Include="Resources\vm\Gallio-Report.xhtml-condensed.vm" />
+    <Content Include="Resources\vm\Gallio-Report.xhtml.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html+xhtml.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html+xhtml.detailed-item.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html+xhtml.detailed-item.log.vm" />
+    <Content Include="Resources\vm\Gallio-Report.html+xhtml.summary-item.vm" />
+    <Content Include="Gallio.Reports.plugin" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

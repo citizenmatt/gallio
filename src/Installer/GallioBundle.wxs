@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+    <?include Common.wxi ?>
+
+    <Product
+        Id="*"
+        Name="Gallio $(var.MajorVersion).$(var.MinorVersion) build $(var.BuildNumber)"
+        Version="$(var.Version)"
+        Manufacturer="www.gallio.org"
+        UpgradeCode="FAAF3C4B-8757-437A-A3D6-9D882DE7D088"
+        Language="1033">
+        <Package
+            Comments="Gallio Bundle"
+	    Description="Gallio Test Automation Platform"
+            Manufacturer="www.gallio.org"
+            InstallerVersion="301"
+            Languages="1033"
+            Compressed="yes"
+	    Platform="$(var.Platform)"
+	    InstallPrivileges="elevated"
+	    InstallScope="perMachine"
+            />
+
+        <!-- Major upgrade -->
+        <Property Id="NEWERVERSIONDETECTED" Secure="yes" />
+        <Property Id="OLDERVERSIONBEINGUPGRADED" Secure="yes" />
+        <Upgrade Id="FAAF3C4B-8757-437A-A3D6-9D882DE7D088">
+            <UpgradeVersion OnlyDetect="yes" Minimum="$(var.Version)" IncludeMinimum="no" Property="NEWERVERSIONDETECTED" />
+
+<?if $(var.Version) = "0.0.0.0" ?>
+            <UpgradeVersion OnlyDetect="no" Maximum="$(var.Version)" IncludeMaximum="yes" Property="OLDERVERSIONBEINGUPGRADED" />
+<?else ?>
+            <UpgradeVersion OnlyDetect="no" Maximum="$(var.Version)" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+<?endif ?>
+        </Upgrade>
+        <Condition Message="A newer version of Gallio is already installed.  It must be removed before this version can be installed.">NOT NEWERVERSIONDETECTED</Condition>
+        <Condition Message="An administrator must approve or install [ProductName].">Privileged</Condition>
+
+        <!-- Check that Microsoft .NET Framework is installed (WinNetFxExtension) -->
+        <PropertyRef Id="NETFRAMEWORK20"/>
+        <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run the Gallio installer again.">
+            <![CDATA[Installed OR NETFRAMEWORK20]]>
+        </Condition>
+
+        <!-- The files are all packaged in a single cab file inside the msi file -->
+        <Media Id="1" EmbedCab="yes" Cabinet="Gallio.cab" />
+
+        <!-- Define the file that gets used as the EULA during install -->
+        <WixVariable Id="WixUILicenseRtf" Value="Gallio.License.rtf" />
+
+        <!-- Define which type of Wix UI we are going to use -->
+        <UIRef Id="WixUI_Gallio" />
+        <UIRef Id="WixUI_ErrorProgressText" />
+
+        <!-- Define all directories used in the install -->
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id='ProgramFilesFolder' Name='PFiles'>
+<?if $(var.Platform) != "x64" ?>
+                <Directory Id='INSTALLDIR' Name='Gallio'>
+                    <Directory Id='binFolder' Name='bin'/>
+                    <Directory Id='docsFolder' Name='docs'/>
+                    <Directory Id='extrasFolder' Name='extras'/>
+                    <Directory Id='samplesFolder' Name='samples'/>
+                    <Directory Id='licensesFolder' Name='licenses'/>
+                    <Directory Id='sdkFolder' Name='sdk'/>
+                </Directory>                
+<?endif?>
+            </Directory>
+	    
+<?if $(var.Platform) = "x64" ?>
+            <Directory Id='ProgramFiles64Folder' Name='PFiles64'>
+                <Directory Id='INSTALLDIR' Name='Gallio'>
+                    <Directory Id='binFolder' Name='bin'/>
+                    <Directory Id='docsFolder' Name='docs'/>
+                    <Directory Id='extrasFolder' Name='extras'/>
+                    <Directory Id='samplesFolder' Name='samples'/>
+                    <Directory Id='licensesFolder' Name='licenses'/>
+                    <Directory Id='sdkFolder' Name='sdk'/>
+                </Directory>                
+            </Directory>
+<?endif?>
+
+            <!-- Desktop Folder Directory for our Desktop Shortcut -->
+            <Directory Id="DesktopFolder" Name="Desktop" />
+
+            <!-- Program Menu Folder and our subfolders for Shortcuts -->
+            <Directory Id="ProgramMenuFolder" Name=".">
+                <Directory Id="GallioMenuFolder" Name="Gallio">
+                    <Directory Id="SamplesMenuFolder" Name="Samples" />
+                </Directory>
+            </Directory>
+    
+            <!-- Local Application Data -->
+            <Directory Id="CommonAppDataFolder" Name="CommonAppData">
+                <Directory Id="GallioCommonAppDataFolder" Name="Gallio" />
+            </Directory>
+        </Directory>
+
+        <DirectoryRef Id="GallioMenuFolder">
+            <!-- Component to remove the Gallio menu folder on uninstall (if empty) -->
+            <Component Id="GallioMenuFolder.RemoveFolder" Guid="{49243D14-436D-47a1-BE3A-AFF7C66C0DFF}">
+                <RemoveFolder Id="GallioMenuFolder.RemoveFolder" On="uninstall" />
+                <RegistryKey Action="none" Root="HKCU" Key="Software\Gallio.org\Gallio\$(var.MajorVersion).$(var.MinorVersion)">
+                    <RegistryValue Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
+                </RegistryKey>
+            </Component>
+        </DirectoryRef>
+
+        <DirectoryRef Id="SamplesMenuFolder">
+            <!-- Component to remove the Samples menu folder on uninstall (if empty) -->
+            <Component Id="SamplesMenuFolder.RemoveFolder" Guid="{19D19824-95C4-4793-8E8C-0E1088D3C129}">
+                <RemoveFolder Id="SamplesMenuFolder.RemoveFolder" On="uninstall" />
+                <RegistryKey Action="none" Root="HKCU" Key="Software\Gallio.org\Gallio\$(var.MajorVersion).$(var.MinorVersion)">
+                    <RegistryValue Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
+                </RegistryKey>
+            </Component>
+        </DirectoryRef>
+
+        <CustomActionRef Id="VS2005Setup" />
+        <CustomActionRef Id="VS90Setup" />
+        <CustomActionRef Id="VS100Setup" />
+
+        <InstallExecuteSequence>
+            <FindRelatedProducts Before="LaunchConditions" />
+            <RemoveExistingProducts After="InstallInitialize" />
+
+            <Custom Action="VS2005Setup" Before="InstallFinalize"><![CDATA[(&feat_MbUnit3.Templates.VS2005 > 1) AND VS2005DEVENV <> ""]]></Custom>
+    
+<?ifdef FEATURE_VISUALSTUDIO_90?>
+            <Custom Action="VS90Setup" Before="InstallFinalize"><![CDATA[(&feat_Gallio.VisualStudio.VS90 > 1 OR &feat_MbUnit3.Templates.VS2008 > 1) AND VS90DEVENV <> ""]]></Custom>
+<?else?>
+            <Custom Action="VS90Setup" Before="InstallFinalize"><![CDATA[(&feat_MbUnit3.Templates.VS2008 > 1) AND VS90DEVENV <> ""]]></Custom>
+<?endif?>
+
+<?ifdef FEATURE_VISUALSTUDIO_100?>
+            <Custom Action="VS100Setup" Before="InstallFinalize"><![CDATA[(&feat_Gallio.VisualStudio.VS100 > 1 OR &feat_MbUnit3.Templates.VS2010 > 1) AND VS100DEVENV <> ""]]></Custom>
+<?else?>
+            <Custom Action="VS100Setup" Before="InstallFinalize"><![CDATA[(&feat_MbUnit3.Templates.VS2010 > 1) AND VS100DEVENV <> ""]]></Custom>
+<?endif?>
+        </InstallExecuteSequence>
+
+        <InstallUISequence>
+            <FindRelatedProducts Before="LaunchConditions" />
+        </InstallUISequence>
+
+        <UI>
+            <ProgressText Action="VS2005Setup" Template="[1]">Updating Visual Studio 2005 registration ...</ProgressText>
+            <ProgressText Action="VS90Setup" Template="[1]">Updating Visual Studio 2008 registration ...</ProgressText>
+            <ProgressText Action="VS100Setup" Template="[1]">Updating Visual Studio 2010 registration ...</ProgressText>
+        </UI>
+
+        <!-- Define the features in the bundle -->
+        
+        <!-- About the Display attribute.
+             From the MSDN:
+
+             The number in this field specifies the order in which the feature is to be displayed in the user interface.
+
+             The value also determines whether or not the feature is initially displayed expanded or collapsed. If the value is null or 0 (zero), the record is not displayed.
+
+             * If the value is odd, the feature node is expanded initially.
+             * If the value is even, the feature node is collapsed initially.
+        -->
+        
+        <FeatureRef Id='feat_Gallio'> <!-- Display="2" -->
+            <FeatureRef Id='feat_Gallio.VisualStudio.Interop'/>
+<?ifdef FEATURE_DLR_INTEGRATION ?>
+            <FeatureRef Id='feat_Gallio.DLRIntegration'/>
+<?endif?>
+        </FeatureRef>
+
+        <FeatureRef Id='feat_MbUnit3'> <!-- Display="4" -->
+            <FeatureRef Id='feat_MbUnit3.Templates.VS2005'/>
+            <FeatureRef Id='feat_MbUnit3.Templates.VS2008'/>
+            <FeatureRef Id='feat_MbUnit3.Templates.VS2010'/>
+        </FeatureRef>
+
+<?ifdef FEATURE_ARCHIMEDES ?>
+        <FeatureRef Id='feat_Archimedes'> <!-- Display="6" -->
+        </FeatureRef>
+<?endif?>
+		
+        <Feature Id='feat_FrameworkAdapters' Title="Test Framework Adapters" Level="1" Display="8" AllowAdvertise="no">
+            <FeatureRef Id='feat_CSUnitAdapter'/>
+            <FeatureRef Id='feat_MbUnit2Adapter'/>
+<?ifdef FEATURE_MSTEST_ADAPTER ?>
+            <FeatureRef Id='feat_MSTestAdapter'/>
+<?endif?>
+            <FeatureRef Id='feat_NUnitAdapter'/>
+<?ifdef FEATURE_RSPEC_ADAPTER ?>
+            <FeatureRef Id='feat_RSpecAdapter'/>
+<?endif?>
+            <FeatureRef Id='feat_XunitAdapter'/>
+            <FeatureRef Id='feat_MbUnitCppAdapter'/>
+        </Feature>
+
+        <Feature Id='feat_Runners' Title='Test Runners' Level="1" Display="10" AllowAdvertise="no">
+            <FeatureRef Id='feat_Gallio.Echo'/>
+            <FeatureRef Id='feat_Gallio.Icarus'/>
+            <FeatureRef Id='feat_Gallio.MsBuildTasks'/>
+            <FeatureRef Id='feat_Gallio.NAntTasks'/>
+            <FeatureRef Id='feat_Gallio.PowerShellCommands'/>
+            <FeatureRef Id='feat_Gallio.TDNet'/>
+
+<?ifdef FEATURE_RESHARPER_RUNNER ?>
+            <FeatureRef Id="feat_Gallio.ReSharper" />
+<?endif?>
+
+<?ifdef FEATURE_VISUALSTUDIO ?>
+            <FeatureRef Id='feat_Gallio.VisualStudio'/>
+<?endif?>
+        </Feature>
+
+        <Feature Id='feat_Tools' Title='Test Tools' Level="1" Display="12" AllowAdvertise="no">
+<?ifdef FEATURE_AUTOCAD ?>
+            <FeatureRef Id='feat_Gallio.AutoCAD'/>
+<?endif?>
+<?ifdef FEATURE_COPY ?>
+            <FeatureRef Id="feat_Gallio.Copy"/>
+<?endif?>
+<?ifdef FEATURE_AMBIENCE ?>
+            <FeatureRef Id="feat_Gallio.Ambience"/>
+<?endif?>
+            <FeatureRef Id='feat_Navigator'/>
+<?ifdef FEATURE_NCOVER_INTEGRATION ?>
+            <FeatureRef Id='feat_NCoverIntegration'/>
+<?endif?>
+            <FeatureRef Id='feat_TeamCityIntegration'/>
+            <FeatureRef Id='feat_TypeMockIntegration'/>
+        </Feature>
+
+        <Feature Id='feat_Docs' Title='Documentation' Level="1" Display="14" AllowAdvertise="no">
+<?ifdef FEATURE_CHM_HELP ?>
+            <FeatureRef Id='feat_Gallio.Help'/>
+<?endif?>
+<?ifdef FEATURE_VS_HELP ?>
+            <FeatureRef Id='feat_Gallio.VSHelp'/>
+<?endif?>
+        </Feature>
+
+        <Feature Id="feat_Samples" Title='Samples' Level="1" Display="16" AllowAdvertise="no">
+            <ComponentRef Id="SamplesMenuFolder.RemoveFolder"/>
+            <FeatureRef Id='feat_Gallio.Samples'/>
+            <FeatureRef Id='feat_MbUnit3.Samples'/>
+        </Feature>
+
+        <Feature Id='feat_Extras' Title='Extras' Level="1" Display="18" AllowAdvertise="no">
+            <FeatureRef Id='feat_CCNetExtensions'/>
+        </Feature>
+
+<?ifdef FEATURE_SDK ?>
+        <FeatureRef Id='feat_SDK'> <!-- Display="20" -->
+		</FeatureRef>
+<?endif?>
+		
+        <!-- -->
+        <!-- Properties used by 'Add or Remove Programs' in Control Panel. -->
+        <!-- -->
+
+        <!-- URL for technical support. -->
+        <Property Id='ARPHELPLINK'>http://www.gallio.org/</Property>
+
+        <!-- URL for application update information. -->
+        <Property Id='ARPURLUPDATEINFO'>http://www.gallio.org/</Property>
+
+        <!-- URL for the home page of the application. -->
+        <Property Id='ARPURLINFOABOUT'>http://www.gallio.org/</Property>
+
+        <!-- Specifies the primary icon for the installation package. -->
+        <Property Id="ARPPRODUCTICON" Value="GallioIcon" />
+        <Icon Id="GallioIcon" SourceFile="Gallio.ico" />
+               
+        <!-- Detect presence of old pre-WiX Gallio installation. -->
+        <Property Id="OLD_GALLIO_UNINSTALL" Secure="yes">
+            <RegistrySearch Id="OldGallioInstallerSearch.LM" Type="raw" Win64="no"
+                Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\Gallio" Name="UninstallString" />
+            <RegistrySearch Id="OldGallioInstallerSearch.CU" Type="raw" Win64="no"
+                Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\Gallio" Name="UninstallString" />
+        </Property>
+        <!-- MSI has difficulty executing arbitary commands picked from the registry. 
+             An alternative is to prompt the users to first uninstall the previous version
+             before they can continue. This should only happen once. After that, the MSI
+             will auto-upgrade versions. This should not be needed once reach late beta stage.
+          -->
+        <Condition Message="A previous version of Gallio is installed. Please uninstall it and try again.">
+            NOT OLD_GALLIO_UNINSTALL
+        </Condition>
+
+    </Product>
+</Wix>

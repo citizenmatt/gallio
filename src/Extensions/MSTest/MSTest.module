@@ -1,0 +1,27 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  <Import Project="MSTest.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.MSTestAdapter\Gallio.MSTestAdapter$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.MSTestAdapter.TestResources\Gallio.MSTestAdapter.TestResources$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.MSTestAdapter.Tests\Gallio.MSTestAdapter.Tests$(ProjectVariant).csproj" />
+
+    <AssemblyFile Include="Gallio.MSTestAdapter\bin\Gallio.MSTestAdapter.dll">
+      <ImagePath>bin\MSTest</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.MSTestAdapter\bin\Gallio.MSTestAdapter.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+   <PluginFile Include="Gallio.MSTestAdapter\Gallio.MSTestAdapter.plugin">
+      <ImagePath>bin\MSTest</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.MSTestAdapter\Readme.txt">
+      <ImagePath>bin\MSTest</ImagePath>
+    </File>
+
+    <TestAssembly Include="Gallio.MSTestAdapter.Tests\bin\Gallio.MSTestAdapter.Tests.dll" />
+
+    <Feature Include="FEATURE_MSTEST_ADAPTER" />
+  </ItemGroup>
+</Project>

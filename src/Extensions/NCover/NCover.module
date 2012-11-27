@@ -1,0 +1,101 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.NCoverIntegration\Gallio.NCoverIntegration$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.NCoverIntegration.Tests\Gallio.NCoverIntegration.Tests$(ProjectVariant).csproj" />
+    
+    <AssemblyFile Include="Gallio.NCoverIntegration\bin\Gallio.NCoverIntegration.dll">
+      <ImagePath>bin\NCover</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.NCoverIntegration\bin\Gallio.NCoverIntegration.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <PluginFile Include="Gallio.NCoverIntegration\Gallio.NCoverIntegration.plugin">
+      <ImagePath>bin\NCover</ImagePath>
+    </PluginFile>
+
+    <File Include="Gallio.NCoverIntegration\Resources\ncover.ico">
+      <ImagePath>bin\NCover\Resources</ImagePath>
+    </File>
+
+    <File Include="libs\NCover Readme.txt">
+      <ImagePath>bin\NCover\libs</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer Readme.txt">
+      <ImagePath>bin\NCover\libs</ImagePath>
+    </File>
+
+    <File Include="libs\NCover\Coverage.xsl">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\CoverLib.dll">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\Microsoft.VC80.CRT.manifest">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\MSVCP80.dll">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\MSVCR80.dll">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\NCover.Console.exe">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\NCover.Console.exe.config">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\NCover.Framework.dll">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    <File Include="libs\NCover\NCoverFAQ.html">
+      <ImagePath>bin\NCover\libs\NCover</ImagePath>
+    </File>
+    
+    <File Include="libs\NCoverExplorer\CommandBars.dll">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\ConsoleConfig.xsd">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\ConsoleExample.config">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\CoverageReport.xsl">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\ICSharpCode.TextEditor.dll">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\license.txt">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorer.Console.exe">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorer.Core.dll">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorer.exe">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorer.exe.config">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorer.NCoverRunner.dll">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorerFAQ.html">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    <File Include="libs\NCoverExplorer\NCoverExplorerReleaseNotes.html">
+      <ImagePath>bin\NCover\libs\NCoverExplorer</ImagePath>
+    </File>
+    
+    <Feature Include="FEATURE_NCOVER_INTEGRATION" />
+
+    <TestAssembly Include="Gallio.NCoverIntegration.Tests\bin\Gallio.NCoverIntegration.Tests.dll" />
+  </ItemGroup>
+</Project>

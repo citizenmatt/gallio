@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.Navigator\Gallio.Navigator$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.Navigator.Tests\Gallio.Navigator.Tests$(ProjectVariant).csproj" />
+    
+    <AssemblyFile Include="Gallio.Navigator\bin\Gallio.Navigator.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Navigator\bin\Gallio.Navigator.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Navigator\Gallio.Navigator.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <PluginFile Include="Gallio.Navigator\Gallio.Navigator.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.Navigator\Gallio.Navigator.Readme.txt">
+      <ImagePath>bin</ImagePath>
+    </File>
+
+    <TestAssembly Include="Gallio.Navigator.Tests\bin\Gallio.Navigator.Tests.dll" />
+  </ItemGroup>
+</Project>

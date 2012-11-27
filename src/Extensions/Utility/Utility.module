@@ -1,0 +1,25 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.Utility\Gallio.Utility$(ProjectVariant).csproj" />
+
+    <AssemblyFile Include="Gallio.Utility\bin\Gallio.Utility.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Utility\bin\Gallio.Utility.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Utility\Gallio.Utility.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <PluginFile Include="Gallio.Utility\Gallio.Utility.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>    
+    <File Include="Gallio.Utility\Resources\Gallio.Utility.ico">
+      <ImagePath>bin\Resources</ImagePath>
+    </File>
+    
+    <Feature Include="FEATURE_UTILITY" />
+  </ItemGroup>
+</Project>

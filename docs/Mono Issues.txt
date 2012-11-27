@@ -1,0 +1,15 @@
+Various issues encountered on Mono.
+
+IsolatedTestDomain:
+
+1. AppDomainSetup.SetConfigurationBytes not implemented.
+2. AppDomainSetup might not be fully supported...
+
+ListUtils:
+
+1. Getting inappropriate collection read-only exception.
+   http://bugzilla.ximian.com/show_bug.cgi?id=82345
+
+Host:
+
+Host app hangs on termination and must be forcibly killed.

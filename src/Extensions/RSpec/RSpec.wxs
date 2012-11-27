@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <?include ..\..\Installer\Common.wxi ?>
+    
+    <?ifdef FEATURE_RSPEC_ADAPTER ?>
+    <?define RSpec.libs.source = "$(var.GallioTargetDir)\bin\RSpec\libs" ?>
+    <?include RSpec-libs.wxi ?>
+    <?define RSpec.scripts.source = "$(var.GallioTargetDir)\bin\RSpec\Scripts" ?>
+    <?include RSpec-scripts.wxi ?>
+
+    <Fragment>
+        <DirectoryRef Id="binFolder" FileSource="$(var.GallioTargetDir)\bin\">
+          <Directory Id="RSpec" Name="RSpec">
+            <Component Id="Gallio.RSpecAdapter" Guid="{67720016-826B-4028-BC2A-89B97F3885BC}" Win64="$(var.Win64Binary)">
+                <File Name="Gallio.RSpecAdapter.dll" KeyPath="yes" />
+                <File Name="Gallio.RSpecAdapter.plugin" />
+            </Component>
+          </Directory>
+        </DirectoryRef>
+      
+        <Feature Id="feat_RSpecAdapter" Title="RSpec" Level="1" AllowAdvertise="no"
+            Description="Installs the RSpec adapter.  Enables Gallio to run RSpec tests.">
+            <ComponentRef Id="Gallio.RSpecAdapter" />
+            <ComponentGroupRef Id="RSpec.libs.ComponentGroup" />
+            <ComponentGroupRef Id="RSpec.scripts.ComponentGroup" />
+        </Feature>
+    </Fragment>
+    <?endif ?>
+</Wix>

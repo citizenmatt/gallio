@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BaseTest_ParameterListAlreadyContainsParameterWithSameName" xml:space="preserve">
+    <value>The parameter list already contains a parameter named '{0}'.</value>
+  </data>
+  <data name="CodeReference_ToString_ParameterName" xml:space="preserve">
+    <value>Parameter '{0}' of </value>
+  </data>
+  <data name="BaseTest_TestAlreadyHasAParent" xml:space="preserve">
+    <value>The test to be added is already a child of another test.</value>
+  </data>
+  <data name="ModelUtils_InvalidSignature" xml:space="preserve">
+    <value>Expected a method with signature ({0}) but found ({1}).</value>
+  </data>
+  <data name="RootTest_RootTestName" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="ConsoleProgressMonitor_CanceledBanner" xml:space="preserve">
+    <value>--- CANCELED ---</value>
+  </data>
+  <data name="ConsoleProgressMonitor_CancelingBanner" xml:space="preserve">
+    <value>&gt;&gt;&gt; CANCELING &lt;&lt;&lt;</value>
+  </data>
+  <data name="CommandLineOutput_ShortForm" xml:space="preserve">
+    <value>(Short form: {0})</value>
+  </data>
+  <data name="CommandLineOutput_AvailableOptions" xml:space="preserve">
+    <value>The available options are: </value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_MissingRequiredDefaultArgument" xml:space="preserve">
+    <value>Missing required default argument.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_MissingRequiredArgument" xml:space="preserve">
+    <value>Missing required argument '/{0}'.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_DuplicateArgument" xml:space="preserve">
+    <value>Duplicate '{0}' argument.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_InvalidArgumentValue" xml:space="preserve">
+    <value>Invalid '{0}' argument value '{1}'.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_DuplicateArgumentValueExpectedUnique" xml:space="preserve">
+    <value>Duplicate '{0}' argument value '{1}', expected unique values.</value>
+  </data>
+  <data name="CommandLineArgumentParser_ResponseFileDescription" xml:space="preserve">
+    <value>Read response file for more options.</value>
+  </data>
+  <data name="CommandLineArgumentParser_ResponseFileValueLabel" xml:space="preserve">
+    <value>file</value>
+  </data>
+  <data name="CommandLineArgumentParser_MoreThanOneDefaultCommandLineArgumentDefined" xml:space="preserve">
+    <value>More than one default command line argument has been defined.</value>
+  </data>
+  <data name="CommandLineArgumentParser_DuplicateArgumentName" xml:space="preserve">
+    <value>Duplicate argument name '{0}'.</value>
+  </data>
+  <data name="CommandLineArgumentParser_UnrecognizedArgument" xml:space="preserve">
+    <value>Unrecognized argument '{0}'.</value>
+  </data>
+  <data name="CommandLineArgumentParser_MismatchedQuotedInResponseFile" xml:space="preserve">
+    <value>Mismatched quotes in response file '{0}'</value>
+  </data>
+  <data name="CommandLineArgumentParser_ResponseFileDoesNotExist" xml:space="preserve">
+    <value>Response file '0' does not exist.</value>
+  </data>
+  <data name="CommandLineArgumentParser_ErrorOpeningResponseFile" xml:space="preserve">
+    <value>Error opening response file '{0}': {1}.</value>
+  </data>
+  <data name="CommandLineArgumentParser_NoArgumentFields" xml:space="preserve">
+    <value>No fields tagged with CommandLineArgumentAttribute.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_CollectionArgumentsMustAllowMultipleValues" xml:space="preserve">
+    <value>Collection arguments must have AllowMultiple flag.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_InvalidUsageOfUniqueFlag" xml:space="preserve">
+    <value>Unique flag only applicable to collection arguments.</value>
+  </data>
+  <data name="CommandLineArgumentParser_ExceptionWhileParsing" xml:space="preserve">
+    <value>A fatal exception occurred while parsing arguments: {0}</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_MissingLongName" xml:space="preserve">
+    <value>Argument long name must be specified.</value>
+  </data>
+  <data name="CommandLineArgumentParser_Argument_UnsupportedValueType" xml:space="preserve">
+    <value>Unsupported value type.</value>
+  </data>
+  <data name="CommandLineArgumentParser_ArgumentObjectIsOfIncorrectType" xml:space="preserve">
+    <value>Parsed argument object is not of the correct type.</value>
+  </data>
+  <data name="FilterParser_EmptyFilterError" xml:space="preserve">
+    <value>The filter expression can't be empty</value>
+  </data>
+  <data name="FilterParser_ColonExpected" xml:space="preserve">
+    <value>Colon expected</value>
+  </data>
+  <data name="FilterParser_CommaExpected" xml:space="preserve">
+    <value>Comma expected</value>
+  </data>
+  <data name="FilterParser_RightBracketExpected" xml:space="preserve">
+    <value>Right bracket expected</value>
+  </data>
+  <data name="FilterParser_StringLiteralExpected" xml:space="preserve">
+    <value>String literal expected</value>
+  </data>
+  <data name="FilterParser_ValueExpected" xml:space="preserve">
+    <value>Value expected</value>
+  </data>
+  <data name="FilterParser_UnexpectedCharacterFound" xml:space="preserve">
+    <value>Unexpected character found ({0})</value>
+  </data>
+  <data name="FilterParser_CannotEscapeCharacter" xml:space="preserve">
+    <value>Cannot escape character {0}</value>
+  </data>
+  <data name="FilterParser_MissingEscapedCharacter" xml:space="preserve">
+    <value>Missing escaped character</value>
+  </data>
+  <data name="FilterParser_MissingEndDelimiter" xml:space="preserve">
+    <value>Missing end {0}</value>
+  </data>
+  <data name="FilterParser_CharCode" xml:space="preserve">
+    <value>(char code = {0})</value>
+  </data>
+  <data name="FilterParser_UnexpectedEndOfInput" xml:space="preserve">
+    <value>Unexpected end of input</value>
+  </data>
+  <data name="RemoteHost_RemoteException" xml:space="preserve">
+    <value>The remote host service threw an exception or could not be reached.</value>
+  </data>
+  <data name="ConsoleProgram_ApplicationTitleFormat" xml:space="preserve">
+    <value>{0} - Version {1}</value>
+  </data>
+  <data name="DefaultRuntime_RuntimeCannotBeInitialized" xml:space="preserve">
+    <value>The runtime could not be initialized.</value>
+  </data>
+  <data name="ThreadAbortScope_ReentranceException" xml:space="preserve">
+    <value>At most one action may be active within the scope at a time.</value>
+  </data>
+	<data name="FilterParser_FilterExpressionExpected" xml:space="preserve">
+    <value>Simple filter expression expected such as '*' or 'Key: value'.</value>
+  </data>
+  <data name="FilterParser_RulesNotSeperated" xml:space="preserve">
+    <value>Separate inclusion and exclusion rules must be separated by 'include' or 'exclude'.</value>
+  </data>
+	<data name="SimpleDiskCache_PurgeException" xml:space="preserve">
+    <value>Could not purge the cache from location '{0}'.</value>
+  </data>
+	<data name="SimpleDiskCache_DiskCacheGroupIndeterminateExistance" xml:space="preserve">
+    <value>Could not determine whether the disk cache group from '{0}' exists.</value>
+  </data>
+  <data name="SimpleDiskCache_DiskCacheGroupDeleteException" xml:space="preserve">
+    <value>Could not delete the disk cache group from '{0}'.</value>
+  </data>
+	<data name="SimpleDiskCache_DiskCacheFileOpenException" xml:space="preserve">
+    <value>Could not open disk cache file '{0}'.</value>
+  </data>
+  <data name="SimpleDiskCache_DiskCacheDirectoryOpenException" xml:space="preserve">
+    <value>Could not open disk cache directory '{0}'.</value>
+  </data>
+	<data name="ExceptionDescription_ZeroOrGreater" xml:space="preserve">
+    <value>Must be greater than or equal to zero.</value>
+  </data>
+	<data name="ExceptionDescription_DictionaryReadOnly" xml:space="preserve">
+    <value>Dictionary is read-only.</value>
+  </data>
+  <data name="CommandLineArgumentAttribute_NoResourceException" xml:space="preserve">
+    <value>Localized attribute strings must supply a resource</value>
+  </data>
+  <data name="CommandLineArgumentAttribute_ResourceNotAStringException" xml:space="preserve">
+    <value>Localized attribute string does not point to a string resource</value>
+  </data>
+  <data name="CommandLineArgumentAttribute_ResourceNotFoundException" xml:space="preserve">
+    <value>Localized attribute string not found in resource named</value>
+  </data>
+</root>

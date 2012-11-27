@@ -1,0 +1,98 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <Module Include="..\Gallio\Gallio.module" />
+    
+    <CSharpProject Include="MbUnit\MbUnit$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit35\MbUnit35$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit.Compatibility\MbUnit.Compatibility$(ProjectVariant).csproj" />
+    
+    <CSharpProject Include="MbUnit.TestResources\MbUnit.TestResources$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit.TestResources.x86\MbUnit.TestResources.x86$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit.TestResources.x64\MbUnit.TestResources.x64$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit.Tests\MbUnit.Tests$(ProjectVariant).csproj" />
+    
+    <File Include="MbUnit Website.url" />
+    
+    <AssemblyFile Include="MbUnit\bin\MbUnit.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="MbUnit\bin\MbUnit.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <XmlDocFile Include="MbUnit\bin\MbUnit.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="MbUnit\MbUnit.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="MbUnit\MbUnit.dll.tdnet">
+      <ImagePath>bin</ImagePath>
+    </File>
+    <File Include="MbUnit\Resources\MbUnit.ico">
+      <ImagePath>bin\Resources</ImagePath>
+    </File>
+    
+	<AssemblyFile Include="MbUnit\bin\NHamcrest.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="MbUnit\bin\NHamcrest.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+	
+    <AssemblyFile Include="MbUnit35\bin\MbUnit35.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="MbUnit35\bin\MbUnit35.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <XmlDocFile Include="MbUnit35\bin\MbUnit35.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="MbUnit35\MbUnit35.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    
+    <AssemblyFile Include="MbUnit.Compatibility\bin\MbUnit.Compatibility.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="MbUnit.Compatibility\bin\MbUnit.Compatibility.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <XmlDocFile Include="MbUnit.Compatibility\bin\MbUnit.Compatibility.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    <PluginFile Include="MbUnit.Compatibility\MbUnit.Compatibility.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    
+    <TestAssembly Include="MbUnit.Tests\bin\MbUnit.Tests.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DotNetFrameworkVersion)'=='4.0'">
+    <CSharpProject Include="MbUnit40\MbUnit40$(ProjectVariant).csproj" />
+    <CSharpProject Include="MbUnit40.Tests\MbUnit40.Tests$(ProjectVariant).csproj" />
+
+    <!-- Reenable when we have some content.
+    <XmlDocFile Include="MbUnit40\bin\MbUnit40.xml" />
+    -->
+    <File Include="MbUnit40\bin\MbUnit40.xml">
+      <ImagePath>bin</ImagePath>
+    </File>
+    
+    <AssemblyFile Include="MbUnit40\bin\MbUnit40.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="MbUnit40\bin\MbUnit40.pdb">
+      <ImagePath>bin</ImagePath>
+    </PdbFile>
+    <PluginFile Include="MbUnit40\MbUnit40.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+
+    <Feature Include="FEATURE_MBUNIT40" />
+    
+    <TestAssembly Include="MbUnit40.Tests\bin\MbUnit40.Tests.dll" />
+  </ItemGroup>
+</Project>

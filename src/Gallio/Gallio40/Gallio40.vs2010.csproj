@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{925E8A25-001F-471E-82D0-141ACD7CB9A8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gallio</RootNamespace>
+    <AssemblyName>Gallio40</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DOTNET40</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio40.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DOTNET40</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Gallio40.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gallio.GenericParsing">
+      <HintPath>..\libs\Gallio.GenericParsing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedAssembly.cs">
+      <Link>Common\Reflection\Impl\UnresolvedAssembly.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedCodeElementFactoryInternal.cs">
+      <Link>Common\Reflection\Impl\UnresolvedCodeElementFactoryInternal.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedConstructorInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedConstructorInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedCustomAttributeProvider.cs">
+      <Link>Common\Reflection\Impl\UnresolvedCustomAttributeProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedEventInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedEventInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedFieldInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedFieldInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedMemberInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedMemberInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedMethodBase.cs">
+      <Link>Common\Reflection\Impl\UnresolvedMethodBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedMethodInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedMethodInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedParameterInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedParameterInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedPropertyInfo.cs">
+      <Link>Common\Reflection\Impl\UnresolvedPropertyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\Gallio\Common\Reflection\Impl\UnresolvedType.cs">
+      <Link>Common\Reflection\Impl\UnresolvedType.cs</Link>
+    </Compile>
+    <Compile Include="Common\Reflection\Impl\UnresolvedCustomAttributeData.cs" />
+    <Compile Include="Framework\Data\DataObjects\DynamicObject.cs" />
+    <Compile Include="Framework\Data\DataObjects\FlatFileToDataTableBuilder.cs" />
+    <Compile Include="Framework\Data\DataObjects\MultipleListEnumerable.cs" />
+    <Compile Include="Framework\Data\DataObjects\TabularDataObjectFactory.cs" />
+    <Compile Include="Framework\Data\DataObjects\XmlDataObject.cs" />
+    <Compile Include="Framework\Data\DataObjects\XmlDataObjectBuilder.cs" />
+    <Compile Include="Framework\Data\DataObjects\XmlDataObjectFactory.cs" />
+    <Compile Include="Framework\Data\DataObjects\XmlDataObjectUtility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gallio35\Gallio35.vs2010.csproj">
+      <Project>{BC28AB7E-5B71-4AEE-BF2D-54ACF7299889}</Project>
+      <Name>Gallio35.vs2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gallio\Gallio.vs2010.csproj">
+      <Project>{6CAB7735-05DA-480D-9A04-50615B00F886}</Project>
+      <Name>Gallio.vs2010</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gallio40.plugin" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

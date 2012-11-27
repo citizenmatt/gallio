@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include ..\..\Installer\Common.wxi ?>
+
+  <Fragment>
+    <DirectoryRef Id="binFolder" FileSource="$(var.GallioTargetDir)\bin\">
+      <Directory Id="NCover" Name="NCover">
+        <Component Id="Gallio.NCoverIntegration" Guid="5C614361-C7FF-4283-A51E-D7DC2A5B8826" Win64="$(var.Win64Binary)">
+          <File Name="Gallio.NCoverIntegration.dll" KeyPath="yes" />
+          <File Name="Gallio.NCoverIntegration.plugin" />
+        </Component>
+
+        <Directory Id="NCover.libs" Name="libs">
+          <Component Id="NCover.Readme" Guid="{86F01EAC-C110-4a5d-9F13-2EAFA32909CD}" Win64="$(var.Win64Binary)">
+            <File Id="NCover.Readme.txt" Name="NCover Readme.txt" KeyPath="yes"/>
+          </Component>
+
+          <Component Id="NCoverExplorer.Readme" Guid="{EA33A01B-5075-4757-AB4D-8150949480D6}" Win64="$(var.Win64Binary)">
+            <File Id="NCoverExplorer.Readme.txt" Name="NCoverExplorer Readme.txt" KeyPath="yes"/>
+          </Component>
+
+          <Directory Id="NCover.libs.NCover" Name="NCover">            
+            <Component Id="NCover.Program" Guid="{E7F6CE38-EAA1-474a-BE27-7941DF5C89A8}" Win64="$(var.Win64Binary)">
+              <File Name="Coverage.xsl" />
+              <File Name="CoverLib.dll" />
+              <File Name="Microsoft.VC80.CRT.manifest"/>
+              <File Name="MSVCP80.dll"/>
+              <File Name="MSVCR80.dll"/>
+              <File Name="NCover.Console.exe" KeyPath="yes" />
+              <File Name="NCover.Console.exe.config" />
+              <File Name="NCover.Framework.dll" />
+              <File Name="NCoverFAQ.html" />
+            </Component>
+          </Directory>
+          
+          <Directory Id="NCover.libs.NCoverExplorer" Name="NCoverExplorer">
+            <Component Id="NCoverExplorer.Program" Guid="{F7D057FF-EB29-47e5-83C6-82A6ACF21D5C}" Win64="$(var.Win64Binary)">
+              <File Name="CommandBars.dll"/>
+              <File Name="ConsoleConfig.xsd"/>
+              <File Name="ConsoleExample.config"/>
+              <File Name="CoverageReport.xsl"/>
+              <File Name="ICSharpCode.TextEditor.dll" Id="NCoverExplorer.ICSharpCode.TextEditor.dll" />
+              <File Name="license.txt"/>
+              <File Name="NCoverExplorer.Console.exe"/>
+              <File Name="NCoverExplorer.Core.dll"/>
+              <File Name="NCoverExplorer.exe"/>
+              <File Name="NCoverExplorer.exe.config"/>
+              <File Name="NCoverExplorer.NCoverRunner.dll"/>
+              <File Name="NCoverExplorerFAQ.html"/>
+              <File Name="NCoverExplorerReleaseNotes.html"/>
+            </Component>
+          </Directory>
+        </Directory>
+		
+		<Directory Id="NCover.Resources" Name="Resources">
+			<Component Id="Gallio.NCover.Resources" Guid="{24D83D9F-405D-43fc-8DD2-31D07D85D2B0}" Win64="$(var.Win64Binary)">
+				<File Name="ncover.ico" KeyPath="yes" />
+			</Component>
+		</Directory>
+
+      </Directory>
+    </DirectoryRef>
+
+    <Feature Id='feat_NCoverIntegration' Title='NCover Integration' Level='1' AllowAdvertise="no"
+        Description='Provides integration with the NCover v1.5.8 code coverage tool (included) and NCover v2 and v3 (must be installed separately).'>
+      <ComponentRef Id="Gallio.NCoverIntegration"/>
+      <ComponentRef Id="NCover.Readme"/>
+      <ComponentRef Id="NCover.Program"/>
+      <ComponentRef Id="NCoverExplorer.Readme"/>
+      <ComponentRef Id="NCoverExplorer.Program"/>
+	  <ComponentRef Id="Gallio.NCover.Resources" />
+    </Feature>
+  </Fragment>
+</Wix>

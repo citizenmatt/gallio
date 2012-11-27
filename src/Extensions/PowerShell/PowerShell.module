@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.PowerShellCommands\Gallio.PowerShellCommands$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.PowerShellCommands.Tests\Gallio.PowerShellCommands.Tests$(ProjectVariant).csproj" />
+    
+    <PluginFile Include="Gallio.PowerShellCommands\Gallio.PowerShellCommands.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <AssemblyFile Include="Gallio.PowerShellCommands\bin\Gallio.PowerShellCommands.dll">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.PowerShellCommands\bin\Gallio.PowerShellCommands.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <File Include="Gallio.PowerShellCommands\Gallio.PowerShellCommands.dll-Help.xml">
+      <ImagePath>bin</ImagePath>
+    </File>
+    <XmlDocFile Include="Gallio.PowerShellCommands\bin\Gallio.PowerShellCommands.xml">
+      <ImagePath>bin</ImagePath>
+    </XmlDocFile>
+    
+    <TestAssembly Include="Gallio.PowerShellCommands.Tests\bin\Gallio.PowerShellCommands.Tests.dll" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,202 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <Module Include="$(RootDir)\Top.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(ToolsDir)\H2Reg.module">
+      <Inherit>true</Inherit>
+    </Module>
+  
+    <Module Include="$(SourceDir)\Common\Common.module">
+      <Inherit>true</Inherit>
+    </Module>
+    
+    <Module Include="$(SourceDir)\Gallio\Gallio.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Gallio\Samples\GallioSamples.module">
+      <Inherit>true</Inherit>
+    </Module>
+    
+    <Module Include="$(SourceDir)\MbUnit\MbUnit.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\MbUnit\Samples\MbUnitSamples.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\MbUnit\Templates\MbUnitTemplates.module">
+      <Inherit>true</Inherit>
+    </Module>
+    
+    <Module Include="$(SourceDir)\Extensions\Ambience\Ambience.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\AutoCAD\AutoCAD.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\CCNet\CCNet.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ControlPanel\ControlPanel.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Copy\Copy.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\CSUnit\CSUnit.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\DLR\DLR.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Echo\Echo.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Icarus\Icarus.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\MbUnit2\MbUnit2.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\MbUnitCpp\MbUnitCpp.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\MSBuild\MSBuild.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\MSTest\MSTest.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NAnt\NAnt.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Navigator\Navigator.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NCover\NCover.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NUnit\NUnit248.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NUnit\NUnit253.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NUnit\NUnit254-10.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\NUnit\NUnitLatest.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\PartCover\PartCover.module">
+      <Inherit>true</Inherit>
+    </Module>	
+    <Module Include="$(SourceDir)\Extensions\PowerShell\PowerShell.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper31.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper40.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper41.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper45.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper50.module">
+      <Inherit>true</Inherit>
+    </Module>
+	<Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper51.module">
+      <Inherit>true</Inherit>
+    </Module>
+	<Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper60.module">
+      <Inherit>true</Inherit>
+    </Module>
+	<Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper61.module">
+      <Inherit>true</Inherit>
+    </Module>
+	<Module Include="$(SourceDir)\Extensions\ReSharper\ReSharper70.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\RSpec\RSpec.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\TDNet\TDNet.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\TeamCity\TeamCity.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\TypeMock\TypeMock.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Utility\Utility.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\VisualStudio\VisualStudio.Interop.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\VisualStudio\VisualStudio90.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\VisualStudio\VisualStudio100.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Xunit\Xunit161.module">
+      <Inherit>true</Inherit>
+    </Module>
+    <Module Include="$(SourceDir)\Extensions\Xunit\XunitLatest.module">
+      <Inherit>true</Inherit>
+    </Module>
+	
+    <!--
+	<Module Include="$(SourceDir)\Archimedes\Archimedes.module">
+      <Inherit>true</Inherit>
+	</Module>
+    -->
+	
+	<Module Include="$(SourceDir)\SDK\SDK.module">
+      <Inherit>true</Inherit>
+	</Module>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ReleaseImageArchive Include="GallioBundle-$(FileVersion).zip" />
+    <ReleaseDebugSymbols Include="Symbols\$(FileVersion)" />
+    
+    <Installer Include="GallioBundle" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(SkipSandcastle)'!='true'">
+    <Feature Include="FEATURE_CHM_HELP" />
+    <Feature Include="FEATURE_VS_HELP" />
+    
+    <Sandcastle Include="$(RootDir)\docs\Docs.shfbproj">
+      <CHMDocsDir>$(ModuleImageDir)\docs</CHMDocsDir>
+      <VSDocsDir>$(ModuleImageDir)\docs\vs</VSDocsDir>
+      <WebDocsDir>$(ModuleDistDir)\APIDocs\$(FileVersion)</WebDocsDir>
+    </Sandcastle>
+  </ItemGroup>
+  
+  <Target Name="BeforeTest"
+          DependsOnTargets="VerifyInstallation" />
+  
+  <Target Name="VerifyInstallation">
+    <Message Text="Verifying installation of all plugins..."
+             Importance="High" />
+
+    <Exec Command="&quot;$(ModuleImageDir)\bin\Gallio.Utility.exe&quot; /v:Verbose VerifyInstallation"
+          IgnoreExitCode="true"
+	  WorkingDirectory="$(ModuleTempDir)">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+    
+    <Error Text="Verification of plugin installation failed!"
+             Condition="'$(ExitCode)'!='0' and ! $(IgnoreTestFailures)" />
+  </Target>
+</Project>

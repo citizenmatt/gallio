@@ -1,0 +1,32 @@
+<Project DefaultTargets="Release" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration>Release</Configuration>
+    <TestReportTypes>XML-Inline</TestReportTypes>
+
+    <Version>$(CCNetLabel)</Version>
+    <Version Condition="'$(Version)'==''">0.0.0.0</Version>
+
+    <AssemblyVersion>$(AssemblyVersion)</AssemblyVersion>
+    <AssemblyVersion Condition="'$(AssemblyVersion)'==''">$(Version)</AssemblyVersion>
+
+    <FileVersion>$(FileVersion)</FileVersion>
+    <FileVersion Condition="'$(FileVersion)'==''">$(Version)</FileVersion>
+
+    <RootDir>$(MSBuildProjectDirectory)</RootDir>
+    <StartDir>$(RootDir)</StartDir>
+    
+    <Modules Condition="'$(Modules)'==''">packages\Bundle Package.module</Modules>
+  </PropertyGroup>
+
+  <Target Name="Release">
+    <MSBuild Projects="$(Modules)"
+             Properties="
+               Configuration=$(Configuration);
+               TestReportTypes=$(TestReportTypes);
+               AssemblyVersion=$(AssemblyVersion);
+               FileVersion=$(FileVersion);
+               RootDir=$(RootDir);
+               StartDir=$(StartDir)"
+	     Targets="Clean;Compile;Image;Test;Dist" />
+  </Target>
+</Project>

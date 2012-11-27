@@ -1,0 +1,68 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.MbUnit2Adapter\Gallio.MbUnit2Adapter$(ProjectVariant).csproj" />
+    
+    <CSharpProject Include="Gallio.MbUnit2Adapter.TestResources\Gallio.MbUnit2Adapter.TestResources$(ProjectVariant).csproj" />
+    <CSharpProject Include="Gallio.MbUnit2Adapter.Tests\Gallio.MbUnit2Adapter.Tests$(ProjectVariant).csproj" />
+    
+    <AssemblyFile Include="Gallio.MbUnit2Adapter\bin\Gallio.MbUnit2Adapter.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.MbUnit2Adapter\bin\Gallio.MbUnit2Adapter.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <PluginFile Include="Gallio.MbUnit2Adapter\Gallio.MbUnit2Adapter.plugin">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.MbUnit2Adapter\MbUnit.Framework.dll.tdnet">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>    
+    <File Include="Gallio.MbUnit2Adapter\Readme.txt">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="Gallio.MbUnit2Adapter\Resources\*.ico">
+      <ImagePath>bin\MbUnit2\Resources</ImagePath>
+    </File>
+        
+    <File Include="libs\MbUnit.Framework.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\MbUnit.Framework.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\MbUnit.Framework.2.0.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\MbUnit.Framework.2.0.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\QuickGraph.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\QuickGraph.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\QuickGraph.Algorithms.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\QuickGraph.Algorithms.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\TestFu.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\TestFu.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\Refly.dll">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    <File Include="libs\Refly.xml">
+      <ImagePath>bin\MbUnit2</ImagePath>
+    </File>
+    
+    <TestAssembly Include="Gallio.MbUnit2Adapter.Tests\bin\Gallio.MbUnit2Adapter.Tests.dll" />
+  </ItemGroup>
+</Project>

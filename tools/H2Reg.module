@@ -1,0 +1,12 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <File Include="H2Reg\H2Reg.exe">
+      <ImagePath>extras</ImagePath>
+    </File>
+    <File Include="H2Reg\H2Reg.ini">
+      <ImagePath>extras</ImagePath>
+    </File>
+  </ItemGroup>
+</Project>

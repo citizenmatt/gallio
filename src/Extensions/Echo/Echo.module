@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+  
+  <ItemGroup>
+    <CSharpProject Include="Gallio.Echo\Gallio.Echo$(ProjectVariant).csproj" />    
+    <CSharpProject Include="Gallio.Echo.Tests\Gallio.Echo.Tests$(ProjectVariant).csproj" />
+    
+    <AssemblyFile Include="Gallio.Echo\bin\Gallio.Echo.exe">
+      <ImagePath>bin</ImagePath>
+    </AssemblyFile>
+    <PdbFile Include="Gallio.Echo\bin\Gallio.Echo.pdb">
+      <ExcludeFromImage>true</ExcludeFromImage>
+    </PdbFile>
+    <ConfigFile Include="Gallio.Echo\bin\Gallio.Echo.exe.config">
+      <ImagePath>bin</ImagePath>
+    </ConfigFile>
+    <PluginFile Include="Gallio.Echo\Gallio.Echo.plugin">
+      <ImagePath>bin</ImagePath>
+    </PluginFile>
+    <File Include="Gallio.Echo\Resources\Gallio.Echo.ico">
+      <ImagePath>bin\Resources</ImagePath>
+    </File>
+    
+    <TestAssembly Include="Gallio.Echo.Tests\bin\Gallio.Echo.Tests.dll" />
+  </ItemGroup>
+</Project>

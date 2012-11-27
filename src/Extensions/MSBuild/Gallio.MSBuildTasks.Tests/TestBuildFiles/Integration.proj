@@ -1,0 +1,85 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="..\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+
+  <PropertyGroup>
+    <TestAssembly>..\bin\MbUnit.TestResources.dll</TestAssembly>
+  </PropertyGroup>
+  
+  <Target Name="PassingTests">
+    <Gallio Filter="Type: PassingTests" Files="$(TestAssembly)"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected successful result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '0'" />
+  </Target>
+  
+  <Target Name="FailingTests">
+    <Gallio Filter="Type: FailingTests" Files="$(TestAssembly)"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true" />
+    
+    <Error Text="Expected failure result code, so should not have reached this point." />
+  </Target>
+  
+  <Target Name="FailingTestsWithIgnoreFailures">
+    <Gallio Filter="Type: FailingTests" Files="$(TestAssembly)" IgnoreFailures="true"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected failure result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '1'" />
+  </Target>
+  
+  <Target Name="NoAssemblies">
+    <Gallio Files=""
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected NoTests result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '16'" />
+  </Target>
+
+  <Target Name="NoTests">
+    <Gallio Filter="Type: NoSuchType" Files="$(TestAssembly)"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected NoTests result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '16'" />
+  </Target>
+
+  <Target Name="NoFilter">
+    <Gallio Filter="" Files="$(TestAssembly)" IgnoreFailures="true"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected failure result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '1'" />
+  </Target>
+  
+  <Target Name="UnhandledException">
+    <Gallio Filter="Type: UnhandledExceptionTest" Files="$(TestAssembly)"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected successful result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '0'" />
+  </Target>  
+  
+  <Target Name="Extensions">
+    <Gallio Filter="Type: PassingTests" Files="$(TestAssembly)"
+            PluginDirectories="$(GallioPath)" IgnoreAnnotations="true"
+            RunnerExtensions="DebugExtension, Gallio" Verbosity="Debug">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Gallio>
+    
+    <Error Text="Expected successful result code, was '$(ExitCode)'."
+           Condition="'$(ExitCode)' != '0'" />
+  </Target>  
+</Project>

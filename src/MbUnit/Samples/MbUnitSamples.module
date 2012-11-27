@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <Import Project="$(RootDir)\bin\Module.targets" />
+
+  <ItemGroup>
+    <File Include="Readme.txt">
+      <ImagePath>samples\MbUnit</ImagePath>
+    </File>
+
+    <File Include="Unit Testing with MbUnit.url">
+      <ImagePath>samples\MbUnit</ImagePath>
+    </File>
+    
+    <File Include="Web Testing with MbUnit and WatiN.url">
+      <ImagePath>samples\MbUnit</ImagePath>
+    </File>
+    
+    <File Include="GUI Testing with MbUnit and White.url">
+      <ImagePath>samples\MbUnit</ImagePath>
+    </File>
+  </ItemGroup>
+</Project>

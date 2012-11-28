@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\v7.0\</OutputPath>
     <DefineConstants>TRACE;DEBUG;RESHARPER_31_OR_NEWER;RESHARPER_40_OR_NEWER;RESHARPER_41_OR_NEWER;RESHARPER_45_OR_NEWER;RESHARPER_50_OR_NEWER;RESHARPER_51_OR_NEWER;RESHARPER_60_OR_NEWER;RESHARPER_61_OR_NEWER;RESHARPER_70</DefineConstants>
-    <DocumentationFile>bin\v7.0\Gallio.ReSharperRunner61.xml</DocumentationFile>
+    <DocumentationFile>bin\v7.0\Gallio.ReSharperRunner70.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591,1685</NoWarn>
     <DebugType>full</DebugType>
@@ -31,7 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\v7.0\</OutputPath>
     <DefineConstants>TRACE;RESHARPER_31_OR_NEWER;RESHARPER_40_OR_NEWER;RESHARPER_41_OR_NEWER;RESHARPER_45_OR_NEWER;RESHARPER_50_OR_NEWER;RESHARPER_51_OR_NEWER;RESHARPER_60_OR_NEWER;RESHARPER_61_OR_NEWER;RESHARPER_70</DefineConstants>
-    <DocumentationFile>bin\v7.0\Gallio.ReSharperRunner61.xml</DocumentationFile>
+    <DocumentationFile>bin\v7.0\Gallio.ReSharperRunner70.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591,1685</NoWarn>

@@ -1,0 +1,7 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ReSharper71Path>..\libs\ReSharper\v7.1</ReSharper71Path>
+    <AssemblySearchPaths>$(ReSharper71Path);$(AssemblySearchPaths)</AssemblySearchPaths>
+  </PropertyGroup>
+</Project>
+

@@ -50,18 +50,17 @@ namespace Gallio.ReSharperRunner.Provider
         private readonly string namespaceName;
         private Memoizer<string> shortNameMemoizer = new Memoizer<string>();
 
-        private GallioTestElement(GallioTestProvider provider, IUnitTestElement parent, string testId, string testName, string kind, bool isTestCase,
+        private GallioTestElement parent;
+
+        private GallioTestElement(GallioTestProvider provider, GallioTestElement parent, string testId, string testName, string kind, bool isTestCase,
             IProject project, IDeclaredElementResolver declaredElementResolver, string assemblyPath, string typeName, string namespaceName)
         {
             this.provider = provider;
             Id = testId;
             TestId = testId;
             this.testName = testName;
-            
+            Children = new List<IUnitTestElement>();
             Parent = parent;
-            if (Parent != null)
-                parent.Children.Add(this);
-            
             Kind = kind;
             this.isTestCase = isTestCase;
             this.project = project;
@@ -69,7 +68,6 @@ namespace Gallio.ReSharperRunner.Provider
             this.assemblyPath = assemblyPath;
             this.typeName = typeName;
             this.namespaceName = namespaceName;
-            Children = new List<IUnitTestElement>();
         }
 
         public string TestId { get; private set; }
@@ -293,7 +291,21 @@ namespace Gallio.ReSharperRunner.Provider
             get { return provider; }
         }
 
-        public IUnitTestElement Parent { get; set; }
+        public IUnitTestElement Parent
+        {
+            get { return parent; }
+            set
+            {
+                if (Equals(value, parent) || Equals(value, this))
+                    return;
+
+                if (parent != null)
+                    parent.Children.Remove(this);
+                parent = value as GallioTestElement;
+                if (parent != null)
+                    parent.Children.Add(this);
+            }
+        }
 
         public UnitTestElementDisposition GetDisposition()
         {

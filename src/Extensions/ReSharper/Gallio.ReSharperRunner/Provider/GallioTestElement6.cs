@@ -28,6 +28,7 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.TaskRunnerFramework;
 using JetBrains.ReSharper.UnitTestFramework;
+using JetBrains.ReSharper.UnitTestFramework.Elements;
 using JetBrains.Util;
 
 namespace Gallio.ReSharperRunner.Provider
@@ -83,16 +84,22 @@ namespace Gallio.ReSharperRunner.Provider
             // survive in memory for quite a long time so we don't want it holding on to all sorts of
             // irrelevant stuff.  Basically we flatten out the test to just those properties that we
             // need to keep.
-            var element = new GallioTestElement(provider, parent,
-                test.Id,
-                test.Name,
-                test.Metadata.GetValue(MetadataKeys.TestKind) ?? "Unknown",
-                test.IsTestCase,
-                ReSharperReflectionPolicy.GetProject(codeElement),
-                ReSharperReflectionPolicy.GetDeclaredElementResolver(codeElement),
-                GetAssemblyPath(codeElement),
-                GetTypeName(codeElement),
-                GetNamespaceName(codeElement));
+            var project = ReSharperReflectionPolicy.GetProject(codeElement);
+            var element = GetElementById(project, test.Id);
+            if (element == null)
+            {
+                element = new GallioTestElement(provider, parent,
+                                                test.Id,
+                                                test.Name,
+                                                test.Metadata.GetValue(MetadataKeys.TestKind) ?? "Unknown",
+                                                test.IsTestCase,
+                                                project,
+                                                ReSharperReflectionPolicy.GetDeclaredElementResolver(codeElement),
+                                                GetAssemblyPath(codeElement),
+                                                GetTypeName(codeElement),
+                                                GetNamespaceName(codeElement));
+            }
+            element.State = UnitTestElementState.Valid;
 
             var categories = test.Metadata[MetadataKeys.Category];
             element.Categories = UnitTestElementCategory.Create(categories);
@@ -105,6 +112,15 @@ namespace Gallio.ReSharperRunner.Provider
             }
 
             return element;
+        }
+
+        private static GallioTestElement GetElementById(IProject project, string testId)
+        {
+#if RESHARPER_71
+            return project.GetSolution().GetComponent<UnitTestElementManager>().GetElementById(project, testId) as GallioTestElement;
+#else
+            return null;
+#endif
         }
 
         private static string GetAssemblyPath(ICodeElementInfo codeElement)

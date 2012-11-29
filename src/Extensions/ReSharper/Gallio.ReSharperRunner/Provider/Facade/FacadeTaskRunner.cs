@@ -23,6 +23,8 @@ using JetBrains.ReSharper.TaskRunnerFramework;
 
 namespace Gallio.ReSharperRunner.Provider.Facade
 {
+#pragma warning disable 672
+
     /// <summary>
     /// Runs remote tasks via the facade.
     /// </summary>
@@ -99,4 +101,6 @@ namespace Gallio.ReSharperRunner.Provider.Facade
             return taskRunner.Execute(facadeTaskServer, facadeLogger, facadeTask, facadeTaskExecutorConfiguration);
         }
     }
+#pragma warning restore 672
+
 }

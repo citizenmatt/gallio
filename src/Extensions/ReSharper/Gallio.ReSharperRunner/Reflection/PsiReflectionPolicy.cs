@@ -92,7 +92,8 @@ namespace Gallio.ReSharperRunner.Reflection
             this.psiManager = psiManager;
         }
 #endif
-		#region Wrapping
+
+        #region Wrapping
 		/// <summary>
         /// Obtains a reflection wrapper for a declared element.
         /// </summary>
@@ -180,7 +181,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticConstructorWrapper(this, target, declaringType);
+            return new StaticConstructorWrapper(this, new DeclaredElementEnvoy<IConstructor>(target), declaringType);
         }
 
         /// <summary>
@@ -194,7 +195,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticMethodWrapper(this, target, declaringType, declaringType, declaringType.Substitution);
+            return new StaticMethodWrapper(this, new DeclaredElementEnvoy<IMethod>(target), declaringType, declaringType, declaringType.Substitution);
         }
 
         /// <summary>
@@ -208,7 +209,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticMethodWrapper(this, target, declaringType, declaringType, declaringType.Substitution);
+            return new StaticMethodWrapper(this, new DeclaredElementEnvoy<IOperator>(target), declaringType, declaringType, declaringType.Substitution);
         }
 
         /// <summary>
@@ -222,7 +223,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticPropertyWrapper(this, target, declaringType, declaringType);
+            return new StaticPropertyWrapper(this, new DeclaredElementEnvoy<IProperty>(target), declaringType, declaringType);
         }
 
         /// <summary>
@@ -236,7 +237,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticFieldWrapper(this, target, declaringType, declaringType);
+            return new StaticFieldWrapper(this, new DeclaredElementEnvoy<IField>(target), declaringType, declaringType);
         }
 
         /// <summary>
@@ -250,7 +251,7 @@ namespace Gallio.ReSharperRunner.Reflection
                 return null;
 
             StaticDeclaredTypeWrapper declaringType = MakeDeclaredTypeWithoutSubstitution(target.GetContainingType());
-            return new StaticEventWrapper(this, target, declaringType, declaringType);
+            return new StaticEventWrapper(this, new DeclaredElementEnvoy<IEvent>(target), declaringType, declaringType);
         }
 
         /// <summary>
@@ -267,7 +268,7 @@ namespace Gallio.ReSharperRunner.Reflection
             if (member == null)
                 return null;
 
-            return new StaticParameterWrapper(this, target, member);
+            return new StaticParameterWrapper(this, new DeclaredElementEnvoy<IParameter>(target), member);
         }
         #endregion
 
@@ -606,7 +607,7 @@ namespace Gallio.ReSharperRunner.Reflection
             IDeclaredType declaredTypeHandle = attributeHandle.AttributeType;
             IConstructor constructorHandle = attributeHandle.Constructor;
 
-            return new StaticConstructorWrapper(this, constructorHandle, MakeDeclaredType(declaredTypeHandle));
+            return new StaticConstructorWrapper(this, new DeclaredElementEnvoy<IConstructor>(constructorHandle), MakeDeclaredType(declaredTypeHandle));
         }
 
         protected override ConstantValue[] GetAttributeConstructorArguments(StaticAttributeWrapper attribute)
@@ -660,7 +661,7 @@ namespace Gallio.ReSharperRunner.Reflection
             {
                 if (ReflectorAttributeUtils.IsAttributeField(field))
                 {
-                    ConstantValue? value = GetAttributeNamedParameter(attributeHandle, (IField)field.Handle);
+                    ConstantValue? value = GetAttributeNamedParameter(attributeHandle, GetDeclaredElement<IField>(field));
                     if (value.HasValue)
                         yield return new KeyValuePair<StaticFieldWrapper, ConstantValue>(field, value.Value);
                 }
@@ -674,7 +675,7 @@ namespace Gallio.ReSharperRunner.Reflection
             {
                 if (ReflectorAttributeUtils.IsAttributeProperty(property))
                 {
-                    ConstantValue? value = GetAttributeNamedParameter(attributeHandle, (IProperty) property.Handle);
+                    ConstantValue? value = GetAttributeNamedParameter(attributeHandle, GetDeclaredElement<IProperty>(property));
                     if (value.HasValue)
                         yield return new KeyValuePair<StaticPropertyWrapper, ConstantValue>(property, value.Value);
                 }
@@ -732,13 +733,13 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Members
         protected override IEnumerable<StaticAttributeWrapper> GetMemberCustomAttributes(StaticMemberWrapper member)
         {
-            IAttributesOwner memberHandle = (IAttributesOwner)member.Handle;
+            IAttributesOwner memberHandle = GetDeclaredElement<IAttributesOwner>(member);
             return GetAttributesForAttributeOwner(memberHandle);
         }
 
         protected override string GetMemberName(StaticMemberWrapper member)
         {
-            IDeclaredElement memberHandle = (IDeclaredElement)member.Handle;
+            IDeclaredElement memberHandle = GetDeclaredElement<IDeclaredElement>(member);
             string shortName = memberHandle.ShortName;
 
             if (shortName == "get_this")
@@ -759,7 +760,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override CodeLocation GetMemberSourceLocation(StaticMemberWrapper member)
         {
-            IDeclaredElement memberHandle = (IDeclaredElement)member.Handle;
+            IDeclaredElement memberHandle = GetDeclaredElement<IDeclaredElement>(member);
             return GetDeclaredElementSourceLocation(memberHandle);
         }
         #endregion
@@ -772,7 +773,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticMethodWrapper GetEventAddMethod(StaticEventWrapper @event)
         {
-            IEvent eventHandle = (IEvent)@event.Handle;
+            IEvent eventHandle = GetDeclaredElement<IEvent>(@event);
             if (!eventHandle.IsValid())
                 return null;
 
@@ -782,7 +783,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticMethodWrapper GetEventRaiseMethod(StaticEventWrapper @event)
         {
-            IEvent eventHandle = (IEvent)@event.Handle;
+            IEvent eventHandle = GetDeclaredElement<IEvent>(@event);
             if (!eventHandle.IsValid())
                 return null;
 
@@ -792,7 +793,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticMethodWrapper GetEventRemoveMethod(StaticEventWrapper @event)
         {
-            IEvent eventHandle = (IEvent)@event.Handle;
+            IEvent eventHandle = GetDeclaredElement<IEvent>(@event);
             if (!eventHandle.IsValid())
                 return null;
 
@@ -802,7 +803,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticTypeWrapper GetEventHandlerType(StaticEventWrapper @event)
         {
-            IEvent eventHandle = (IEvent)@event.Handle;
+            IEvent eventHandle = GetDeclaredElement<IEvent>(@event);
             return MakeType(eventHandle.Type);
         }
         #endregion
@@ -810,7 +811,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Fields
         protected override FieldAttributes GetFieldAttributes(StaticFieldWrapper field)
         {
-            IField fieldHandle = (IField)field.Handle;
+            IField fieldHandle = GetDeclaredElement<IField>(field);
 
             FieldAttributes flags = 0;
             switch (fieldHandle.GetAccessRights())
@@ -844,7 +845,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticTypeWrapper GetFieldType(StaticFieldWrapper field)
         {
-            IField fieldHandle = (IField)field.Handle;
+            IField fieldHandle = GetDeclaredElement<IField>(field);
             return MakeType(fieldHandle.Type);
         }
         #endregion
@@ -858,13 +859,13 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticTypeWrapper GetPropertyType(StaticPropertyWrapper property)
         {
-            IProperty propertyHandle = (IProperty)property.Handle;
+            IProperty propertyHandle = GetDeclaredElement<IProperty>(property);
             return MakeType(propertyHandle.Type);
         }
 
         protected override StaticMethodWrapper GetPropertyGetMethod(StaticPropertyWrapper property)
         {
-            IProperty propertyHandle = (IProperty)property.Handle;
+            IProperty propertyHandle = GetDeclaredElement<IProperty>(property);
             if (!propertyHandle.IsValid())
                 return null;
 
@@ -878,7 +879,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticMethodWrapper GetPropertySetMethod(StaticPropertyWrapper property)
         {
-            IProperty propertyHandle = (IProperty)property.Handle;
+            IProperty propertyHandle = GetDeclaredElement<IProperty>(property);
             if (!propertyHandle.IsValid())
                 return null;
 
@@ -894,7 +895,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Functions
         protected override MethodAttributes GetFunctionAttributes(StaticFunctionWrapper function)
         {
-            IFunction functionHandle = (IFunction)function.Handle;
+            IFunction functionHandle = GetDeclaredElement<IFunction>(function);
 
             AccessRights accessRights = functionHandle.GetAccessRights();
             if (functionHandle is DefaultConstructor && function.DeclaringType.IsAbstract)
@@ -952,7 +953,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override CallingConventions GetFunctionCallingConvention(StaticFunctionWrapper function)
         {
-            IFunction functionHandle = (IFunction)function.Handle;
+            IFunction functionHandle = GetDeclaredElement<IFunction>(function);
 
             // FIXME: No way to determine VarArgs convention.
             CallingConventions flags = CallingConventions.Standard;
@@ -962,13 +963,13 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override IList<StaticParameterWrapper> GetFunctionParameters(StaticFunctionWrapper function)
         {
-            IFunction functionHandle = (IFunction)function.Handle;
+            IFunction functionHandle = GetDeclaredElement<IFunction>(function);
             if (!functionHandle.IsValid())
                 return Common.Collections.EmptyArray<StaticParameterWrapper>.Instance;
 
             return GenericCollectionUtils.ConvertAllToArray<IParameter, StaticParameterWrapper>(functionHandle.Parameters, delegate(IParameter parameter)
             {
-                return new StaticParameterWrapper(this, parameter, function);
+                return new StaticParameterWrapper(this, new DeclaredElementEnvoy<IParameter>(parameter), function);
             });
         }
         #endregion
@@ -976,7 +977,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Methods
         protected override IList<StaticGenericParameterWrapper> GetMethodGenericParameters(StaticMethodWrapper method)
         {
-            IFunction methodHandle = (IFunction)method.Handle;
+            IFunction methodHandle = GetDeclaredElement<IFunction>(method);
             if (!methodHandle.IsValid())
                 return Common.Collections.EmptyArray<StaticGenericParameterWrapper>.Instance;
 
@@ -992,12 +993,12 @@ namespace Gallio.ReSharperRunner.Reflection
 #endif
 
             return Array.ConvertAll(parameterHandles, parameter => 
-				StaticGenericParameterWrapper.CreateGenericMethodParameter(this, parameter, method));
+				StaticGenericParameterWrapper.CreateGenericMethodParameter(this, new DeclaredElementEnvoy<ITypeParameter>(parameter), method));
         }
 
         protected override StaticParameterWrapper GetMethodReturnParameter(StaticMethodWrapper method)
         {
-            IFunction methodHandle = (IFunction)method.Handle;
+            IFunction methodHandle = GetDeclaredElement<IFunction>(method);
             if (!methodHandle.IsValid())
                 return null;
 
@@ -1017,14 +1018,14 @@ namespace Gallio.ReSharperRunner.Reflection
 #else
             var parameter = new Parameter(methodHandle, 0, type, null);
 #endif
-            return new StaticParameterWrapper(this, parameter, method);
+            return new StaticParameterWrapper(this, new DeclaredElementEnvoy<IParameter>(parameter), method);
         }
         #endregion
 
         #region Parameters
         protected override ParameterAttributes GetParameterAttributes(StaticParameterWrapper parameter)
         {
-            IParameter parameterHandle = (IParameter)parameter.Handle;
+            IParameter parameterHandle = GetDeclaredElement<IParameter>(parameter);
 
             ParameterAttributes flags = 0;
 #if RESHARPER_60_OR_NEWER
@@ -1040,26 +1041,26 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override IEnumerable<StaticAttributeWrapper> GetParameterCustomAttributes(StaticParameterWrapper parameter)
         {
-            IParameter parameterHandle = (IParameter)parameter.Handle;
+            IParameter parameterHandle = GetDeclaredElement<IParameter>(parameter);
             return GetAttributesForAttributeOwner(parameterHandle);
         }
 
         protected override string GetParameterName(StaticParameterWrapper parameter)
         {
-            IParameter parameterHandle = (IParameter)parameter.Handle;
+            IParameter parameterHandle = GetDeclaredElement<IParameter>(parameter);
             return parameterHandle.ShortName;
         }
 
         protected override int GetParameterPosition(StaticParameterWrapper parameter)
         {
-            IParameter parameterHandle = (IParameter)parameter.Handle;
+            IParameter parameterHandle = GetDeclaredElement<IParameter>(parameter);
             int parameterIndex = parameterHandle.ContainingParametersOwner.Parameters.IndexOf(parameterHandle);
             return parameterIndex;
         }
 
         protected override StaticTypeWrapper GetParameterType(StaticParameterWrapper parameter)
         {
-            IParameter parameterHandle = (IParameter)parameter.Handle;
+            IParameter parameterHandle = GetDeclaredElement<IParameter>(parameter);
             StaticTypeWrapper parameterType = MakeType(parameterHandle.Type);
 
             if (parameterHandle.Kind != ParameterKind.VALUE)
@@ -1072,7 +1073,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Types
         protected override TypeAttributes GetTypeAttributes(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement) type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
 
             TypeAttributes flags = 0;
             ReflectorFlagsUtils.AddFlagIfTrue(ref flags, TypeAttributes.Interface, typeHandle is IInterface);
@@ -1117,7 +1118,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticAssemblyWrapper GetTypeAssembly(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             return WrapModule(GetModule(typeHandle));
         }
 
@@ -1146,7 +1147,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override string GetTypeNamespace(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 return "";
             return typeHandle.GetContainingNamespace().QualifiedName;
@@ -1154,7 +1155,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override StaticDeclaredTypeWrapper GetTypeBaseType(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 return null;
 
@@ -1192,7 +1193,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override IList<StaticDeclaredTypeWrapper> GetTypeInterfaces(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 return Common.Collections.EmptyArray<StaticDeclaredTypeWrapper>.Instance;
 
@@ -1283,7 +1284,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override IList<StaticGenericParameterWrapper> GetTypeGenericParameters(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 return Common.Collections.EmptyArray<StaticGenericParameterWrapper>.Instance;
 
@@ -1299,12 +1300,12 @@ namespace Gallio.ReSharperRunner.Reflection
                 BuildTypeGenericParameters(ownerType, declaringType, genericParameters);
 
             foreach (ITypeParameter parameterHandle in typeHandle.TypeParameters)
-                genericParameters.Add(StaticGenericParameterWrapper.CreateGenericTypeParameter(this, parameterHandle, ownerType));
+                genericParameters.Add(StaticGenericParameterWrapper.CreateGenericTypeParameter(this, new DeclaredElementEnvoy<ITypeParameter>(parameterHandle), ownerType));
         }
 
         protected override IEnumerable<StaticConstructorWrapper> GetTypeConstructors(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
@@ -1320,7 +1321,7 @@ namespace Gallio.ReSharperRunner.Reflection
                         foundDefault = true;
                     }
 
-                    yield return new StaticConstructorWrapper(this, constructorHandle, type);
+                    yield return new StaticConstructorWrapper(this, new DeclaredElementEnvoy<IConstructor>(constructorHandle), type);
                 }
             }
 
@@ -1339,20 +1340,20 @@ namespace Gallio.ReSharperRunner.Reflection
         protected override IEnumerable<StaticMethodWrapper> GetTypeMethods(StaticDeclaredTypeWrapper type,
             StaticDeclaredTypeWrapper reflectedType)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
             foreach (IMethod methodHandle in typeHandle.Methods)
             {
                 if (methodHandle.IsValid())
-                    yield return new StaticMethodWrapper(this, methodHandle, type, reflectedType, type.Substitution);
+                    yield return new StaticMethodWrapper(this, new DeclaredElementEnvoy<IMethod>(methodHandle), type, reflectedType, type.Substitution);
             }
 
             foreach (IOperator operatorHandle in typeHandle.Operators)
             {
                 if (operatorHandle.IsValid())
-                    yield return new StaticMethodWrapper(this, operatorHandle, type, reflectedType, type.Substitution);
+                    yield return new StaticMethodWrapper(this, new DeclaredElementEnvoy<IOperator>(operatorHandle), type, reflectedType, type.Substitution);
             }
 
             foreach (StaticPropertyWrapper property in GetTypeProperties(type, reflectedType))
@@ -1377,21 +1378,21 @@ namespace Gallio.ReSharperRunner.Reflection
         protected override IEnumerable<StaticPropertyWrapper> GetTypeProperties(StaticDeclaredTypeWrapper type,
             StaticDeclaredTypeWrapper reflectedType)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
             foreach (IProperty propertyHandle in typeHandle.Properties)
             {
                 if (propertyHandle.IsValid())
-                    yield return new StaticPropertyWrapper(this, propertyHandle, type, reflectedType);
+                    yield return new StaticPropertyWrapper(this, new DeclaredElementEnvoy<IProperty>(propertyHandle), type, reflectedType);
             }
         }
 
         protected override IEnumerable<StaticFieldWrapper> GetTypeFields(StaticDeclaredTypeWrapper type,
             StaticDeclaredTypeWrapper reflectedType)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
@@ -1401,13 +1402,13 @@ namespace Gallio.ReSharperRunner.Reflection
                 foreach (IField fieldHandle in classHandle.Fields)
                 {
                     if (fieldHandle.IsValid())
-                        yield return new StaticFieldWrapper(this, fieldHandle, type, reflectedType);
+                        yield return new StaticFieldWrapper(this, new DeclaredElementEnvoy<IField>(fieldHandle), type, reflectedType);
                 }
 
                 foreach (IField fieldHandle in classHandle.Constants)
                 {
                     if (fieldHandle.IsValid())
-                        yield return new StaticFieldWrapper(this, fieldHandle, type, reflectedType);
+                        yield return new StaticFieldWrapper(this, new DeclaredElementEnvoy<IField>(fieldHandle), type, reflectedType);
                 }
             }
             else
@@ -1418,13 +1419,13 @@ namespace Gallio.ReSharperRunner.Reflection
                     foreach (IField fieldHandle in structHandle.Fields)
                     {
                         if (fieldHandle.IsValid())
-                            yield return new StaticFieldWrapper(this, fieldHandle, type, reflectedType);
+                            yield return new StaticFieldWrapper(this, new DeclaredElementEnvoy<IField>(fieldHandle), type, reflectedType);
                     }
 
                     foreach (IField fieldHandle in structHandle.Constants)
                     {
                         if (fieldHandle.IsValid())
-                            yield return new StaticFieldWrapper(this, fieldHandle, type, reflectedType);
+                            yield return new StaticFieldWrapper(this, new DeclaredElementEnvoy<IField>(fieldHandle), type, reflectedType);
                     }
                 }
             }
@@ -1433,27 +1434,27 @@ namespace Gallio.ReSharperRunner.Reflection
         protected override IEnumerable<StaticEventWrapper> GetTypeEvents(StaticDeclaredTypeWrapper type,
             StaticDeclaredTypeWrapper reflectedType)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
             foreach (IEvent eventHandle in typeHandle.Events)
             {
                 if (eventHandle.IsValid())
-                    yield return new StaticEventWrapper(this, eventHandle, type, reflectedType);
+                    yield return new StaticEventWrapper(this, new DeclaredElementEnvoy<IEvent>(eventHandle), type, reflectedType);
             }
         }
 
         protected override IEnumerable<StaticTypeWrapper> GetTypeNestedTypes(StaticDeclaredTypeWrapper type)
         {
-            ITypeElement typeHandle = (ITypeElement)type.Handle;
+            ITypeElement typeHandle = GetDeclaredElement<ITypeElement>(type);
             if (!typeHandle.IsValid())
                 yield break;
 
             foreach (ITypeElement nestedTypeHandle in typeHandle.NestedTypes)
             {
                 if (nestedTypeHandle.IsValid())
-                    yield return new StaticDeclaredTypeWrapper(this, nestedTypeHandle, type, type.Substitution);
+                    yield return new StaticDeclaredTypeWrapper(this, new DeclaredElementEnvoy<ITypeElement>(nestedTypeHandle), type, type.Substitution);
             }
         }
 
@@ -1534,11 +1535,11 @@ namespace Gallio.ReSharperRunner.Reflection
             {
                 StaticDeclaredTypeWrapper declaringType = MakeDeclaredType(declaringTypeElementHandle,
                     substitutionHandle);
-                type = new StaticDeclaredTypeWrapper(this, typeElementHandle, declaringType, declaringType.Substitution);
+                type = new StaticDeclaredTypeWrapper(this, new DeclaredElementEnvoy<ITypeElement>(typeElementHandle), declaringType, declaringType.Substitution);
             }
             else
             {
-                type = new StaticDeclaredTypeWrapper(this, typeElementHandle, null, StaticTypeSubstitution.Empty);
+                type = new StaticDeclaredTypeWrapper(this, new DeclaredElementEnvoy<ITypeElement>(typeElementHandle), null, StaticTypeSubstitution.Empty);
             }
 
 #if ! RESHARPER_50_OR_NEWER
@@ -1581,11 +1582,11 @@ namespace Gallio.ReSharperRunner.Reflection
             ITypeElement declaringTypeHandle = typeParameterHandle.OwnerType;
             if (declaringTypeHandle != null)
             {
-                return StaticGenericParameterWrapper.CreateGenericTypeParameter(this, typeParameterHandle, MakeDeclaredTypeWithoutSubstitution(declaringTypeHandle));
+                return StaticGenericParameterWrapper.CreateGenericTypeParameter(this, new DeclaredElementEnvoy<ITypeElement>(typeParameterHandle), MakeDeclaredTypeWithoutSubstitution(declaringTypeHandle));
             }
             else
             {
-                return StaticGenericParameterWrapper.CreateGenericMethodParameter(this, typeParameterHandle, Wrap(typeParameterHandle.OwnerMethod));
+                return StaticGenericParameterWrapper.CreateGenericMethodParameter(this, new DeclaredElementEnvoy<ITypeParameter>(typeParameterHandle), Wrap(typeParameterHandle.OwnerMethod));
             }
         }
         #endregion
@@ -1593,7 +1594,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region Generic Parameters
         protected override GenericParameterAttributes GetGenericParameterAttributes(StaticGenericParameterWrapper genericParameter)
         {
-            ITypeParameter genericParameterHandle = (ITypeParameter)genericParameter.Handle;
+            ITypeParameter genericParameterHandle = GetDeclaredElement<ITypeParameter>(genericParameter);
 
             GenericParameterAttributes flags = 0;
             ReflectorFlagsUtils.AddFlagIfTrue(ref flags, GenericParameterAttributes.NotNullableValueTypeConstraint, genericParameterHandle.IsValueType);
@@ -1604,7 +1605,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override int GetGenericParameterPosition(StaticGenericParameterWrapper genericParameter)
         {
-            ITypeParameter genericParameterHandle = (ITypeParameter)genericParameter.Handle;
+            ITypeParameter genericParameterHandle = GetDeclaredElement<ITypeParameter>(genericParameter);
             int parameterIndex = genericParameterHandle.Index;
 
             // Must also factor in generic parameters of declaring types.
@@ -1626,7 +1627,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         protected override IList<StaticTypeWrapper> GetGenericParameterConstraints(StaticGenericParameterWrapper genericParameter)
         {
-            ITypeParameter genericParameterHandle = (ITypeParameter)genericParameter.Handle;
+            ITypeParameter genericParameterHandle = GetDeclaredElement<ITypeParameter>(genericParameter);
 			var typeConstraints = genericParameterHandle.TypeConstraints;
 #if RESHARPER_60_OR_NEWER        	
         	return GenericCollectionUtils.ConvertAllToArray<IType, StaticTypeWrapper>(new List<IType>(typeConstraints), MakeType);
@@ -1639,8 +1640,7 @@ namespace Gallio.ReSharperRunner.Reflection
         #region GetDeclaredElementResolver and GetProject
         protected override IDeclaredElementResolver GetDeclaredElementResolver(StaticWrapper element)
         {
-            IDeclaredElement declaredElement = GetDeclaredElement(element);
-            return new DeclaredElementResolver(declaredElement);
+            return new DeclaredElementResolver(element.Handle as IDeclaredElementEnvoy);
         }
 
         protected override IProject GetProject(StaticWrapper element)
@@ -1649,27 +1649,30 @@ namespace Gallio.ReSharperRunner.Reflection
             if (project != null)
                 return project;
 
-            IDeclaredElement declaredElement = GetDeclaredElement(element);
+            IDeclaredElement declaredElement = GetDeclaredElement<IDeclaredElement>(element);
             return declaredElement != null && declaredElement.IsValid() ? GetModule(declaredElement) as IProject : null;
         }
 
-        private IDeclaredElement GetDeclaredElement(StaticWrapper element)
+
+        private static T GetDeclaredElement<T>(StaticWrapper wrapper)
+            where T : IDeclaredElement
         {
-            return element.Handle as IDeclaredElement;
+            var envoy = wrapper.Handle as IDeclaredElementEnvoy;
+            return envoy != null ? (T)envoy.GetValidDeclaredElement() : default(T);
         }
 
         private sealed class DeclaredElementResolver : IDeclaredElementResolver
         {
-            private readonly IDeclaredElement declaredElement;
+            private readonly IDeclaredElementEnvoy declaredElementEnvoy;
 
-            public DeclaredElementResolver(IDeclaredElement declaredElement)
+            public DeclaredElementResolver(IDeclaredElementEnvoy declaredElementEnvoy)
             {
-                this.declaredElement = declaredElement;
+                this.declaredElementEnvoy = declaredElementEnvoy;
             }
 
             public IDeclaredElement ResolveDeclaredElement()
             {
-                return declaredElement;
+                return declaredElementEnvoy != null ? declaredElementEnvoy.GetValidDeclaredElement() : null;
             }
         }
         #endregion
@@ -1689,7 +1692,7 @@ namespace Gallio.ReSharperRunner.Reflection
 
         private StaticMethodWrapper WrapAccessor(IAccessor accessorHandle, StaticMemberWrapper member)
         {
-            return accessorHandle != null ? new StaticMethodWrapper(this, accessorHandle, member.DeclaringType, member.ReflectedType, member.Substitution) : null;
+            return accessorHandle != null ? new StaticMethodWrapper(this, new DeclaredElementEnvoy<IAccessor>(accessorHandle), member.DeclaringType, member.ReflectedType, member.Substitution) : null;
         }
         #endregion
 

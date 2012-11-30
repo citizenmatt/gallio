@@ -64,7 +64,9 @@ using JetBrains.UI.Application.PluginSupport;
 [assembly: PluginVendor("Gallio")]
 
 // ReSharper resources
-[assembly: ActionsXml("Gallio.ReSharperRunner.Resources.Actions.xml")]
 #if !RESHARPER_70
+[assembly: ActionsXml("Gallio.ReSharperRunner.Resources.Actions.xml")]
 [assembly: ImagesBase("Gallio.ReSharperRunner.Resources")]
+#else
+[assembly: ActionsXml("Gallio.ReSharperRunner.Resources.rs7x.Actions.xml")]
 #endif
